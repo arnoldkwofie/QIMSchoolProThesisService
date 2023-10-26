@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace QIMSchoolPro.Thesis.Persistence.Interfaces
 {
-    public interface ISubmissionRepository : IRepository<Submission>
+    public interface IDocumentRepository : IRepository<Document>
     {
     }
 }

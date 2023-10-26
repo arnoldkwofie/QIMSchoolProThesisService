@@ -41,6 +41,8 @@ namespace QIMSchoolPro.Thesis.Persistence
         private static IServiceCollection RegisterRepositories(this IServiceCollection services)
         {
             services.AddScoped<ISubmissionRepository, SubmissionRepository>();
+            services.AddScoped<IDocumentRepository, DocumentRepository>();
+            services.AddScoped<IVersionRepository, VersionRepository>();
                 
             return services;
         }

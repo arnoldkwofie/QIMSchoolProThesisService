@@ -8,6 +8,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 using QIMSchoolPro.Thesis.Persistence;
 using QIMSchoolPro.Thesis.Application;
+using QIMSchoolPro.Thesis.Processors;
 
 namespace QIMSchoolProThesisService
 {
@@ -20,7 +21,8 @@ namespace QIMSchoolProThesisService
                 .AddHttpContextAccessor()
                 .InstallSwagger(configuration)
                 .AddCore(configuration)
-                .AddInfrastructure(configuration);
+                .AddInfrastructure(configuration)
+                .AddProcessors();
            
         }
         private static IServiceCollection InstallDefaults(this IServiceCollection services)

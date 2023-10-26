@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.10">
       <PrivateAssets>all</PrivateAssets>
@@ -17,6 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Qface.Application.Shared\Qface.Application.Shared.csproj" />
+    <ProjectReference Include="..\Qface.Persistence.EntityFramework.Extensions\Qface.Persistence.EntityFramework.Extensions.csproj" />
     <ProjectReference Include="..\QIMSchoolPro.Thesis.Domain\QIMSchoolPro.Thesis.Domain.csproj" />
   </ItemGroup>
 

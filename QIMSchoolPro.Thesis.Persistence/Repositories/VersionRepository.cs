@@ -8,14 +8,15 @@ using System.Linq;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
+using Version = QIMSchoolPro.Thesis.Domain.Entities.Version;
 
 namespace QIMSchoolPro.Thesis.Persistence.Repositories
 {
-    public class SubmissionRepository : Repository<Submission>, ISubmissionRepository
+    public class VersionRepository : Repository<Version>, IVersionRepository
     {
-        public ILogger<Submission> Logger { get; }
+        public ILogger<Version> Logger { get; }
 
-        public SubmissionRepository(ThesisDbContext context, ILogger<Submission> logger): base(context)
+        public VersionRepository(ThesisDbContext context, ILogger<Version> logger): base(context)
         {
             Logger = logger;
         }

@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace QIMSchoolPro.Thesis.Domain.Enums
 {
-    public enum TransitionState
+    public enum DocumentType
     {
-        Created=1,
-        Department_Review,
-        SPS_Review,
-        Examiner_Review
+        Primary=1,
+        Secondary
 
     }
 }

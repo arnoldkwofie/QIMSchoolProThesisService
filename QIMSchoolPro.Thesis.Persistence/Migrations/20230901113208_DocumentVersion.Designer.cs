@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using QIMSchoolPro.Thesis.Persistence;
@@ -11,9 +12,11 @@ using QIMSchoolPro.Thesis.Persistence;
 namespace QIMSchoolPro.Thesis.Persistence.Migrations
 {
     [DbContext(typeof(ThesisDbContext))]
-    partial class ThesisDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230901113208_DocumentVersion")]
+    partial class DocumentVersion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,9 +32,6 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("DocumentType")
-                        .HasColumnType("integer");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -63,10 +63,6 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Abstract")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("OtherProperty")
                         .IsRequired()
                         .HasColumnType("text");
@@ -81,10 +77,6 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
 
                     b.Property<DateTime>("SubmissionDate")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<int>("TransitionState")
                         .HasColumnType("integer");
@@ -114,10 +106,6 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("OtherProperty1")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Path")
                         .IsRequired()
                         .HasColumnType("text");
 

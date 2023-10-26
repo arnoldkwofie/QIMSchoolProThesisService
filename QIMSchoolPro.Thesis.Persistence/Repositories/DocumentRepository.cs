@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace QIMSchoolPro.Thesis.Persistence.Repositories
 {
-    public class SubmissionRepository : Repository<Submission>, ISubmissionRepository
+    public class DocumentRepository : Repository<Document>, IDocumentRepository
     {
-        public ILogger<Submission> Logger { get; }
+        public ILogger<Document> Logger { get; }
 
-        public SubmissionRepository(ThesisDbContext context, ILogger<Submission> logger): base(context)
+        public DocumentRepository(ThesisDbContext context, ILogger<Document> logger): base(context)
         {
             Logger = logger;
         }

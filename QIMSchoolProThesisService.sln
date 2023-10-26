@@ -13,21 +13,25 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{8267D520-A02A-4CBA-8621-FFE51B91B6C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIMSchoolPro.Thesis.Application", "QIMSchoolPro.Thesis.Application\QIMSchoolPro.Thesis.Application.csproj", "{C3461160-B4E4-4CCA-8734-695A83B2EDE3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QIMSchoolPro.Thesis.Application", "QIMSchoolPro.Thesis.Application\QIMSchoolPro.Thesis.Application.csproj", "{C3461160-B4E4-4CCA-8734-695A83B2EDE3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIMSchoolPro.Thesis.Domain", "QIMSchoolPro.Thesis.Domain\QIMSchoolPro.Thesis.Domain.csproj", "{C87128E1-9D80-41D7-A159-7F8DDF74D0AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QIMSchoolPro.Thesis.Domain", "QIMSchoolPro.Thesis.Domain\QIMSchoolPro.Thesis.Domain.csproj", "{C87128E1-9D80-41D7-A159-7F8DDF74D0AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIMSchoolPro.Thesis.Processors", "QIMSchoolPro.Thesis.Processors\QIMSchoolPro.Thesis.Processors.csproj", "{C17DF4FA-AF35-4023-BF73-638B4CF48EC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QIMSchoolPro.Thesis.Processors", "QIMSchoolPro.Thesis.Processors\QIMSchoolPro.Thesis.Processors.csproj", "{C17DF4FA-AF35-4023-BF73-638B4CF48EC2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIMSchoolPro.Thesis.Infrastructure", "QIMSchoolPro.Thesis.Infrastructure\QIMSchoolPro.Thesis.Infrastructure.csproj", "{120EBC8C-8D41-4FC6-8F11-279210F5F6DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QIMSchoolPro.Thesis.Infrastructure", "QIMSchoolPro.Thesis.Infrastructure\QIMSchoolPro.Thesis.Infrastructure.csproj", "{120EBC8C-8D41-4FC6-8F11-279210F5F6DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIMSchoolPro.Thesis.Persistence", "QIMSchoolPro.Thesis.Persistence\QIMSchoolPro.Thesis.Persistence.csproj", "{E136A334-8F30-4521-8023-56770592E51A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QIMSchoolPro.Thesis.Persistence", "QIMSchoolPro.Thesis.Persistence\QIMSchoolPro.Thesis.Persistence.csproj", "{E136A334-8F30-4521-8023-56770592E51A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIMSchoolProThesisService", "QIMSchoolProThesisService\QIMSchoolProThesisService.csproj", "{CB89576B-6B3A-4F5B-AC95-E08DB20C3F5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QIMSchoolProThesisService", "QIMSchoolProThesisService\QIMSchoolProThesisService.csproj", "{CB89576B-6B3A-4F5B-AC95-E08DB20C3F5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qface.Domain.Shared", "Qface.Domain.Shared\Qface.Domain.Shared.csproj", "{EE99D386-E5EF-4A65-B43C-342125D3D8CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qface.Domain.Shared", "Qface.Domain.Shared\Qface.Domain.Shared.csproj", "{EE99D386-E5EF-4A65-B43C-342125D3D8CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qsmart.EventBus.Shared", "Qsmart.EventBus.Shared\Qsmart.EventBus.Shared.csproj", "{4696D995-C92F-42A9-A844-4EA5D9277BB2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qsmart.EventBus.Shared", "Qsmart.EventBus.Shared\Qsmart.EventBus.Shared.csproj", "{4696D995-C92F-42A9-A844-4EA5D9277BB2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qface.Application.Shared", "Qface.Application.Shared\Qface.Application.Shared.csproj", "{7679E021-C72F-4C5A-BDAE-4304AD693157}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qface.Persistence.EntityFramework.Extensions", "Qface.Persistence.EntityFramework.Extensions\Qface.Persistence.EntityFramework.Extensions.csproj", "{8681270D-5CE3-497B-8E6E-B7CD6EC50BA0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,6 +71,14 @@ Global
 		{4696D995-C92F-42A9-A844-4EA5D9277BB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4696D995-C92F-42A9-A844-4EA5D9277BB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4696D995-C92F-42A9-A844-4EA5D9277BB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7679E021-C72F-4C5A-BDAE-4304AD693157}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7679E021-C72F-4C5A-BDAE-4304AD693157}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7679E021-C72F-4C5A-BDAE-4304AD693157}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7679E021-C72F-4C5A-BDAE-4304AD693157}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8681270D-5CE3-497B-8E6E-B7CD6EC50BA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8681270D-5CE3-497B-8E6E-B7CD6EC50BA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8681270D-5CE3-497B-8E6E-B7CD6EC50BA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8681270D-5CE3-497B-8E6E-B7CD6EC50BA0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -84,6 +96,8 @@ Global
 		{CB89576B-6B3A-4F5B-AC95-E08DB20C3F5A} = {C83037F0-FBB7-4D94-BB98-EE5B228664A6}
 		{EE99D386-E5EF-4A65-B43C-342125D3D8CF} = {8267D520-A02A-4CBA-8621-FFE51B91B6C4}
 		{4696D995-C92F-42A9-A844-4EA5D9277BB2} = {8267D520-A02A-4CBA-8621-FFE51B91B6C4}
+		{7679E021-C72F-4C5A-BDAE-4304AD693157} = {8267D520-A02A-4CBA-8621-FFE51B91B6C4}
+		{8681270D-5CE3-497B-8E6E-B7CD6EC50BA0} = {8267D520-A02A-4CBA-8621-FFE51B91B6C4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2C994137-5A3E-451F-8A6E-8F83FC3C0B3D}
