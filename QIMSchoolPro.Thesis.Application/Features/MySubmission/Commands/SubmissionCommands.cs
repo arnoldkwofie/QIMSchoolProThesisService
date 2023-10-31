@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QIMSchoolPro.Thesis.Application.Features.Submission.Commands
+namespace QIMSchoolPro.Thesis.Application.Features.MySubmission.Commands
 {
     public static class Create
     {

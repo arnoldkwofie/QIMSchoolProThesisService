@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using QIMSchoolPro.Thesis.Application.Features.Submission.Commands;
-using QIMSchoolPro.Thesis.Application.Features.Submission.Queries;
+using QIMSchoolPro.Thesis.Application.Features.MySubmission.Commands;
+using QIMSchoolPro.Thesis.Application.Features.MySubmission.Queries;
 using QIMSchoolPro.Thesis.Domain.Entities;
 using QIMSchoolProThesisService.Controllers.Base;
 
@@ -20,9 +20,17 @@ namespace QIMSchoolProThesisService.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<List<SubmissionDto>> Gets()
+        public async Task<IEnumerable<SubmissionDto>> Gets()
         {
             return await Mediator.Send(new GetSubmissions.Query());
+        }
+
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<SubmissionDto> Get(int id)
+        {
+            return await Mediator.Send(new GetSubmission.Query(id));
         }
     }
 }

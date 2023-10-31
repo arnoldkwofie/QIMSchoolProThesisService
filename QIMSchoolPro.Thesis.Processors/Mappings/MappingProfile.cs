@@ -1,4 +1,5 @@
 ﻿
+//using AutoMapper;
 using AutoMapper;
 using Qface.Application.Shared.Dtos;
 
@@ -14,12 +15,9 @@ namespace QIMSchoolPro.Students.Processors.Mappings
 		{
 
 			CreateMap<Submission, SubmissionDto>().ReverseMap();
-			CreateMap<Document, DocumentDto>().ReverseMap();
+            CreateMap<Document, DocumentDto>().ReverseMap();
 			CreateMap<Version, VersionDto>().ReverseMap();
 			
-
-
-            
 			
 		}
 	}

@@ -19,7 +19,9 @@ namespace QIMSchoolPro.Thesis.Domain.Entities
         public TransitionState TransitionState { get; set; }
         public DateTime SubmissionDate { get; set; }
         public AcademicPeriod AcademicPeriod { get; set; }
-        public AuditDto Audit { get; set; }
+        public string OtherProperty { get;  set; } 
+        public string OtherProperty1 { get;  set; } 
+       // public AuditDto Audit { get; set; }
 
     }
 }

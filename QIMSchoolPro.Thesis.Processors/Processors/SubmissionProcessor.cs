@@ -72,13 +72,29 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
             try
             {
                 var data = await _submissionRepository.GetAllAsync();
-                return _mapper.Map<List<SubmissionDto>>(data);
+                var dd = _mapper.Map<List<SubmissionDto>>(data);
+                return dd;
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
             
+        }
+
+        public async Task<SubmissionDto> Get(int id)
+        {
+            try
+            {
+                var data = await _submissionRepository.GetAsync(id);
+                var dd = _mapper.Map<SubmissionDto>(data);
+                return dd;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
         }
 
 

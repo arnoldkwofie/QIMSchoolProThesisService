@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using QIMSchoolPro.Thesis.Processors.Processors;
@@ -30,14 +31,13 @@ namespace QIMSchoolPro.Thesis.Application
             return services;
         }
 
-        public static IServiceCollection RegisterAutoMapper(this IServiceCollection services)
-        {
-            var assemblies = Assembly.GetExecutingAssembly();
-            services.AddAutoMapper(assemblies);
+        //public static IServiceCollection RegisterAutoMapper(this IServiceCollection services)
+        //{
+        //    var assemblies = Assembly.GetExecutingAssembly();
+        //    services.AddAutoMapper(assemblies);
+        //    return services;
 
-            return services;
-
-        }
+        //}
         public static IServiceCollection RegisterProcessors(this IServiceCollection services)
         {
 
