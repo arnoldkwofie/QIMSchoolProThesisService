@@ -27,13 +27,12 @@ namespace QIMSchoolPro.Thesis.Persistence
             var assemblyName = typeof(ThesisDbContext).Assembly.FullName;
 
             services.AddDbContext<ThesisDbContext>(options =>
-              options.UseNpgsql(
-                  configuration.GetConnectionString("DefaultConnection"),
-                  b =>
-                  {
-                      b.MigrationsAssembly(assemblyName);
-                  }));
-
+               options.UseNpgsql(
+                   configuration.GetConnectionString("DefaultConnection"),
+                   b =>
+                   {
+                       b.MigrationsAssembly(assemblyName);
+                   }));
             return services;
         }
 
