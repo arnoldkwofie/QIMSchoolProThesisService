@@ -18,6 +18,8 @@ namespace QIMSchoolPro.Thesis.Domain.Entities
         public TransitionState TransitionState { get; set; }
         public DateTime SubmissionDate { get; set; }
         public AcademicPeriod AcademicPeriod { get; set; }
+        public List<Document> Documents { get; set; }   
+        public List<SubmissionHistory> SubmissionHistories { get; set; }
 
         public Submission() 
         {

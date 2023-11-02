@@ -22,7 +22,18 @@ namespace QIMSchoolPro.Thesis.Persistence.Repositories
         }
 
 
-        
+        public async Task<List<Version>> GetVersionsByDocumentId(int id) 
+        { 
+            return  GetBaseQuery().Where(a=>a.DocumentId == id).ToList();
+        }
+
+
+        public override IQueryable<Version> GetBaseQuery()
+        {
+            return base.GetBaseQuery();
+                
+
+        }
 
     }
 }

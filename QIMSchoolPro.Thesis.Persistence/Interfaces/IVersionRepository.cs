@@ -11,5 +11,6 @@ namespace QIMSchoolPro.Thesis.Persistence.Interfaces
 {
     public interface IVersionRepository : IRepository<Version>
     {
+        Task<List<Version>> GetVersionsByDocumentId(int id);
     }
 }

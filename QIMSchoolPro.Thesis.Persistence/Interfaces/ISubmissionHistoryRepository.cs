@@ -5,12 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Version = QIMSchoolPro.Thesis.Domain.Entities.Version;
 
 namespace QIMSchoolPro.Thesis.Persistence.Interfaces
 {
-    public interface ISubmissionRepository : IRepository<Submission>
+    public interface ISubmissionHistoryRepository : IRepository<SubmissionHistory>
     {
-        Task<List<Submission>> GetUserSubmissions();
-        Task<Submission> Get(int id);
+        Task<List<SubmissionHistory>> GetSubmissionHistoryBySubmissionId(int id);
     }
 }

@@ -13,26 +13,28 @@ namespace QIMSchoolPro.Thesis.Domain.Entities
     {
         public int Id { get; set; }
         public int DocumentId { get; set; }
-        public Document Document { get; set; }
+        //public Document Document { get; set; }
         public string Name { get; set; }
         public string Path { get; set; }
+        public int Index { get; set; }
         
 
         public Version() 
         {
         }
 
-        public Version(int documentId, string name, string path)
+        public Version(int documentId, string name, string path, int index)
         {
           DocumentId = documentId;
           Name= name;
           Path = path;
+          Index= index;
         }
 
-        public static Version Create(int documentId, string name, string path)
+        public static Version Create(int documentId, string name, string path, int index)
         {
             return new Version(
-                documentId, name, path
+                documentId, name, path, index
             );
         }
     }

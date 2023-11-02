@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using QIMSchoolPro.Thesis.Persistence;
@@ -11,9 +12,11 @@ using QIMSchoolPro.Thesis.Persistence;
 namespace QIMSchoolPro.Thesis.Persistence.Migrations
 {
     [DbContext(typeof(ThesisDbContext))]
-    partial class ThesisDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231102193426_AddIndex")]
+    partial class AddIndex
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -92,40 +95,6 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Submission", (string)null);
-                });
-
-            modelBuilder.Entity("QIMSchoolPro.Thesis.Domain.Entities.SubmissionHistory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Activity")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("ActivityDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("OtherProperty")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("OtherProperty1")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("PartyId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("SubmissionId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("SubmissionHistory", (string)null);
                 });
 
             modelBuilder.Entity("QIMSchoolPro.Thesis.Domain.Entities.Version", b =>
@@ -291,56 +260,6 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
 
                     b.Navigation("AcademicPeriod")
                         .IsRequired();
-
-                    b.Navigation("Audit")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("QIMSchoolPro.Thesis.Domain.Entities.SubmissionHistory", b =>
-                {
-                    b.OwnsOne("Qface.Domain.Shared.ValueObjects.Audit", "Audit", b1 =>
-                        {
-                            b1.Property<int>("SubmissionHistoryId")
-                                .HasColumnType("integer");
-
-                            b1.Property<DateTime>("Created")
-                                .HasColumnType("timestamp with time zone");
-
-                            b1.Property<string>("CreatedBy")
-                                .IsRequired()
-                                .HasColumnType("text");
-
-                            b1.Property<string>("EntityStatus")
-                                .HasColumnType("text");
-
-                            b1.Property<string>("EntityStatusCreateBy")
-                                .IsRequired()
-                                .HasColumnType("text");
-
-                            b1.Property<DateTime?>("EntityStatusCreated")
-                                .HasColumnType("timestamp with time zone");
-
-                            b1.Property<DateTime?>("EntityStatusLastModified")
-                                .HasColumnType("timestamp with time zone");
-
-                            b1.Property<string>("EntityStatusLastModifiedBy")
-                                .IsRequired()
-                                .HasColumnType("text");
-
-                            b1.Property<DateTime?>("LastModified")
-                                .HasColumnType("timestamp with time zone");
-
-                            b1.Property<string>("LastModifiedBy")
-                                .IsRequired()
-                                .HasColumnType("text");
-
-                            b1.HasKey("SubmissionHistoryId");
-
-                            b1.ToTable("SubmissionHistory");
-
-                            b1.WithOwner()
-                                .HasForeignKey("SubmissionHistoryId");
-                        });
 
                     b.Navigation("Audit")
                         .IsRequired();

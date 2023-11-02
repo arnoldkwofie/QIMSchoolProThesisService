@@ -11,7 +11,7 @@ namespace QIMSchoolProThesisService.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> Create([FromForm] Create.Command command)
+        public async Task<IActionResult> Create([FromForm] SubmissionCreate.Command command)
         {
             await Mediator.Send(command);
             return NoContent();
@@ -20,9 +20,9 @@ namespace QIMSchoolProThesisService.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IEnumerable<SubmissionDto>> Gets()
+        public async Task<IEnumerable<SubmissionDto>> GetUserSubmissions()
         {
-            return await Mediator.Send(new GetSubmissions.Query());
+            return await Mediator.Send(new GetUserSubmissions.Query());
         }
 
         [HttpGet]

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace QIMSchoolPro.Thesis.Application.Features.MySubmission.Commands
 {
-    public static class Create
+    public static class SubmissionCreate
     {
       
         public class Command : IRequest

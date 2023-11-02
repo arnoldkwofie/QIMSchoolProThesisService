@@ -19,4 +19,9 @@
     <ProjectReference Include="..\QIMSchoolPro.Thesis.Processors\QIMSchoolPro.Thesis.Processors.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\MySubmissionHistory\Commands\" />
+    <Folder Include="Features\MyVersion\Queries\" />
+  </ItemGroup>
+
 </Project>

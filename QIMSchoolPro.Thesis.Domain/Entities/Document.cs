@@ -13,10 +13,10 @@ namespace QIMSchoolPro.Thesis.Domain.Entities
     {
         public int Id { get; set; }
         public int SubmissionId { get; set; }
-        public Submission Submission { get; set; }
+        //public Submission Submission { get; set; }
         public string Name { get; set; }
         public DocumentType DocumentType { get; set; }
-
+        public List<Version> Versions { get; set; }
 
         public Document() 
         {

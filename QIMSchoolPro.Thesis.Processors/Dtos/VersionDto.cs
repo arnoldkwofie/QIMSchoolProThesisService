@@ -14,9 +14,9 @@ namespace QIMSchoolPro.Thesis.Domain.Entities
     {
         public int Id { get; set; }
         public int DocumentId { get; set; }
-        public DocumentDto Document { get; set; }
+        //public DocumentDto Document { get; set; }
         public string Name { get; set; }
         public string Path { get; set; }
-        public AuditDto Audit { get; set; }
+        //public AuditDto Audit { get; set; }
     }
 }

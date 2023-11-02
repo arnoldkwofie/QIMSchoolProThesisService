@@ -42,6 +42,7 @@ namespace QIMSchoolPro.Thesis.Persistence
             services.AddScoped<ISubmissionRepository, SubmissionRepository>();
             services.AddScoped<IDocumentRepository, DocumentRepository>();
             services.AddScoped<IVersionRepository, VersionRepository>();
+            services.AddScoped<ISubmissionHistoryRepository, SubmissionHistoryRepository>();
                 
             return services;
         }

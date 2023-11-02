@@ -3,6 +3,7 @@ using QIMSchoolPro.Thesis.Domain.Entities;
 using QIMSchoolPro.Thesis.Domain.Enums;
 using QIMSchoolPro.Thesis.Domain.ValueObjects;
 using QIMSchoolPro.Thesis.Persistence.Interfaces;
+using QIMSchoolPro.Thesis.Persistence.Repositories;
 using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
@@ -23,20 +24,30 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
             _versionRepository = versionRepository;
         }
 
-        //public async Task Create(VersionCommand command, CancellationToken cancellationToken)
-        //{
-        //    try
-        //    {
-                
-        //        var entity = Version.Create(command.DocumentId, command.Name);
+        public async Task Create(int documentId, IFormFile file, CancellationToken cancellationToken)
+        {
+            try
+            {
 
-        //        await _versionRepository.InsertAsync(entity, cancellationToken);
+                if (file != null)
+                {
 
-        //    }catch (Exception ex)
-        //    {
-        //        throw new Exception(ex.Message);
-        //    }
-        //}
+                    var data = await _versionRepository.GetVersionsByDocumentId(documentId);
+                    var lastRecord = data.LastOrDefault();
+                    var index = lastRecord?.Index == null? 1 : lastRecord.Index + 1;
+
+                    var version = Version.Create(documentId, "v" + index, file.FileName, index);
+                    await _versionRepository.InsertAsync(version, cancellationToken);
+
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 
     public class VersionCommand

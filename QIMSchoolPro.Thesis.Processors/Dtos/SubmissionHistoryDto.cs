@@ -10,19 +10,13 @@ using System.Threading.Tasks;
 
 namespace QIMSchoolPro.Thesis.Domain.Entities
 {
-    public class DocumentDto 
+    public class SubmissionHistoryDto 
     {
         public int Id { get; set; }
         public int SubmissionId { get; set; }
-        //public SubmissionDto Submission { get; set; }
-        public string Name { get; set; }
-        public DocumentType DocumentType { get; set; }
-
-        //public AuditDto Audit { get; set; }
-        public List<VersionDto> Versions { get; set; }
-
-
-
+        public int PartyId { get; set; }
+        public string Activity { get; set; }
+        public DateTime ActivityDate { get; set; }
 
     }
 }

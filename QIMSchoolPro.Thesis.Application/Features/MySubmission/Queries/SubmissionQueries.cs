@@ -11,8 +11,8 @@ using System.Threading.Tasks;
 namespace QIMSchoolPro.Thesis.Application.Features.MySubmission.Queries
 {
     
-        public static class GetSubmissions
-        {
+        public static class GetUserSubmissions
+    {
             public class Query : IRequest<IEnumerable<SubmissionDto>>
             {
                 public Query()
@@ -32,7 +32,7 @@ namespace QIMSchoolPro.Thesis.Application.Features.MySubmission.Queries
 
                 public async Task<IEnumerable<SubmissionDto>> Handle(Query request, CancellationToken cancellationToken)
                 {
-                    var result = await _submissionProcessor.Gets();
+                    var result = await _submissionProcessor.GetUserSubmissions();
                     return result;
                 }
             }
