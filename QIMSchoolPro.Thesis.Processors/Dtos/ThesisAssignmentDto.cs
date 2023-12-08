@@ -14,7 +14,7 @@ namespace QIMSchoolPro.Thesis.Domain.Entities
     {
         public int Id { get; set; }
         public int SubmissionId { get; set; }
-        //public Submission Submission { get; set; }
+        public SubmissionDto Submission { get; set; }
         public int StaffId { get; set; }
         public bool Accepted { get; set; }
 
