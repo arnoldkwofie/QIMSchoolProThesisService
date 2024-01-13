@@ -18,8 +18,5 @@ namespace QIMSchoolPro.Thesis.Domain.Entities
         public int StaffId { get; set; }
         public bool Accepted { get; set; }
 
-
-
-
     }
 }

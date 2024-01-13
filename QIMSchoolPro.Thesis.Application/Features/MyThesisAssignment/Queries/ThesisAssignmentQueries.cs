@@ -15,11 +15,11 @@ namespace QIMSchoolPro.Thesis.Application.Features.MySubmission.Queries
     {
             public class Query : IRequest<IEnumerable<ThesisAssignmentDto>>
             {
-                public Query(int id)
+                public Query(string id)
                 {
                     Id= id;
                 }
-                public int Id { get; set; }
+                public string Id { get; set; }
 
         }
 

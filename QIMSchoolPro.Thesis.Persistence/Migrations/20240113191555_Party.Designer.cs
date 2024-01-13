@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using QIMSchoolPro.Thesis.Persistence;
@@ -11,9 +12,11 @@ using QIMSchoolPro.Thesis.Persistence;
 namespace QIMSchoolPro.Thesis.Persistence.Migrations
 {
     [DbContext(typeof(ThesisDbContext))]
-    partial class ThesisDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240113191555_Party")]
+    partial class Party
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -234,8 +237,6 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("SubmissionId");
 
                     b.ToTable("ThesisAssignment", (string)null);
                 });
@@ -641,12 +642,6 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
 
             modelBuilder.Entity("QIMSchoolPro.Thesis.Domain.Entities.ThesisAssignment", b =>
                 {
-                    b.HasOne("QIMSchoolPro.Thesis.Domain.Entities.Submission", "Submission")
-                        .WithMany()
-                        .HasForeignKey("SubmissionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.OwnsOne("Qface.Domain.Shared.ValueObjects.Audit", "Audit", b1 =>
                         {
                             b1.Property<int>("ThesisAssignmentId")
@@ -693,8 +688,6 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
 
                     b.Navigation("Audit")
                         .IsRequired();
-
-                    b.Navigation("Submission");
                 });
 
             modelBuilder.Entity("QIMSchoolPro.Thesis.Domain.Entities.Version", b =>

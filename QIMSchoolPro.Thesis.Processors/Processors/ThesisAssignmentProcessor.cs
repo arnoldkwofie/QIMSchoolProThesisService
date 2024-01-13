@@ -13,6 +13,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Version = QIMSchoolPro.Thesis.Domain.Entities.Version;
 
+using Qface.Application.Shared.Common.Interfaces;
+
 namespace QIMSchoolPro.Thesis.Processors.Processors
 {
     [ProcessorBase]
@@ -20,11 +22,13 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
     {
         private readonly IThesisAssignmentRepository _thesisAssignmentRepository;
         private readonly IMapper _mapper;
+        private readonly IIdentityService _identityService;
 
-        public ThesisAssignmentProcessor(IThesisAssignmentRepository thesisAssignmentRepository, IMapper mapper)
+        public ThesisAssignmentProcessor(IThesisAssignmentRepository thesisAssignmentRepository, IMapper mapper, IIdentityService identityService)
         {
             _thesisAssignmentRepository = thesisAssignmentRepository;
             _mapper = mapper;
+            _identityService = identityService;
         }
 
         public async Task Create(ThesisAssignmentCommand command, CancellationToken cancellationToken)
@@ -48,9 +52,13 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
             }
         }
 
-        public async Task<List<ThesisAssignmentDto>> GetByStaffId(int staffId)
-        { 
-            var data = await _thesisAssignmentRepository.GetByStaffId(staffId);
+        public async Task<List<ThesisAssignmentDto>> GetByStaffId(string staffId)
+        {
+
+            var email = _identityService.GetEmail();
+
+            //use email to get staffId
+           var data = await _thesisAssignmentRepository.GetByStaffId(1);
 
             return _mapper.Map<List<ThesisAssignmentDto>>(data);
         }

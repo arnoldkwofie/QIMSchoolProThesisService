@@ -3,6 +3,7 @@ using QIMSchoolPro.Thesis.Domain.Enums;
 using QIMSchoolPro.Thesis.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace QIMSchoolPro.Thesis.Domain.Entities
     {
         public int Id { get; set; }
         public int SubmissionId { get; set; }
+        
         public Submission Submission { get; set; }
         public int StaffId { get; set; }
         public bool Accepted { get; set; }

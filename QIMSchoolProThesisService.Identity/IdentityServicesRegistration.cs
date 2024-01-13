@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Qface.Application.Shared.Common.Interfaces;
 using QIMSchoolPro.Thesis.Application.Contracts.Identity;
 using QIMSchoolPro.Thesis.Application.Models.Identity;
 using QIMSchoolProThesisService.Identity.Models;
@@ -36,6 +37,7 @@ namespace QIMSchoolProThesisService.Identity
 
             services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IIdentityService, IdentityService>();
 
             services.AddAuthentication(options =>
                 {
