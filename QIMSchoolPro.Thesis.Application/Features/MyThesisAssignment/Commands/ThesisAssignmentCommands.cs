@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using QIMSchoolPro.Thesis.Processors.Processors;
+using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,8 @@ using System.Threading.Tasks;
 
 namespace QIMSchoolPro.Thesis.Application.Features.MyThesisAssignment.ThesisAssignmentCommands
 {
-    public static class ThesisAssignmentCreate
+	//[SwaggerSchemaId("ThesisAssignmentCreate_Command")]
+	public static class ThesisAssignmentCreate
     {
       
         public class Command : IRequest
@@ -32,8 +34,11 @@ namespace QIMSchoolPro.Thesis.Application.Features.MyThesisAssignment.ThesisAssi
                 await _thesisAssignmentProcessor.Create(request.Payload,cancellationToken);
             }
         }
-
-
     }
+
+
+	
+
+
 
 }

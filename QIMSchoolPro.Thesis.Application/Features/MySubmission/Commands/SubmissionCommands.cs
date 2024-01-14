@@ -40,4 +40,36 @@ namespace QIMSchoolPro.Thesis.Application.Features.MySubmission.Commands
 
     }
 
+
+
+	public static class PostSubmission
+	{
+
+		public class PostSubmissionCommand : IRequest
+		{
+			public SubmissionCommand Payload { get; set; }
+
+		}
+
+		public class Handler : IRequestHandler<PostSubmissionCommand>
+		{
+			private readonly SubmissionProcessor _submissionprocessor;
+
+			public Handler(SubmissionProcessor submissionprocessor)
+			{
+				_submissionprocessor = submissionprocessor;
+
+			}
+			public async Task Handle(PostSubmissionCommand request, CancellationToken cancellationToken)
+			{
+				await _submissionprocessor.PostSubmission(request.Payload, cancellationToken);
+			}
+		}
+
+
+	}
+
+
+
+
 }

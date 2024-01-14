@@ -12,7 +12,8 @@ namespace QIMSchoolPro.Thesis.Domain.Entities
     public class Submission : AuditableAutoEntity
     {
         public int Id { get; set; }
-        public string StudentNumber { get; set; }
+        //public string StudentNumber { get; set; }
+        public Student Student { get; set; }
         public string Title { get; set; }
         public string Abstract { get; set; }
         public TransitionState TransitionState { get; set; }
@@ -27,7 +28,7 @@ namespace QIMSchoolPro.Thesis.Domain.Entities
 
         public Submission(string studentNumber, string _abstract, string title, TransitionState transitionState, DateTime submissionDate, AcademicPeriod academicPeriod)
         {
-            StudentNumber = studentNumber;
+            //StudentNumber = studentNumber;
             Abstract = _abstract;
             Title = title;
             TransitionState = transitionState;
@@ -41,5 +42,15 @@ namespace QIMSchoolPro.Thesis.Domain.Entities
                 studentNumber, _abstract, title, transitionState, submissionDate, academicPeriod
             );
         }
-    }
+
+		public Submission Update(string _abstract, string title, TransitionState transitionState, DateTime submissionDate, AcademicPeriod academicPeriod)
+		{
+			Abstract = _abstract;
+			Title = title;
+            TransitionState=transitionState;
+            SubmissionDate = submissionDate;
+            AcademicPeriod = academicPeriod;
+			return this;
+		}
+	}
 }

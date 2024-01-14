@@ -59,6 +59,8 @@ namespace QIMSchoolProThesisService.Identity
                     };
                 });
 
+            services.AddHttpContextAccessor();
+
             return services;
         }
   }

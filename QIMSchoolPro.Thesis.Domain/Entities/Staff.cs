@@ -12,10 +12,10 @@ namespace QIMSchoolPro.Thesis.Domain.Entities
 	{
 		public string StaffNumber { get; private set; }
 		public string ProfileUrl { get; private set; }
-		public int? DepartmentId { get; private set; }
+		public int DepartmentId { get; private set; }
 		//public Department Department { get; private set; }
 		//public StaffCategory StaffCategory { get; private set; }
-		//public Party Party { get; set; }
+		public Party Party { get; set; }
 		public int PartyId { get; set; }
 
 

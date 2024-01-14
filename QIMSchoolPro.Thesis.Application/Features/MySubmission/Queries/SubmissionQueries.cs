@@ -39,6 +39,36 @@ namespace QIMSchoolPro.Thesis.Application.Features.MySubmission.Queries
         }
 
 
+
+
+    public static class GetDepartmentSubmissions
+    {
+        public class Query : IRequest<IEnumerable<SubmissionDto>>
+        {
+            public Query()
+            {
+
+            }
+        }
+
+        public class Handler : IRequestHandler<Query, IEnumerable<SubmissionDto>>
+        {
+            private readonly SubmissionProcessor _submissionProcessor;
+
+            public Handler(SubmissionProcessor submissionProcessor)
+            {
+                _submissionProcessor = submissionProcessor;
+            }
+
+            public async Task<IEnumerable<SubmissionDto>> Handle(Query request, CancellationToken cancellationToken)
+            {
+                var result = await _submissionProcessor.GetDepartmentSubmissions();
+                return result;
+            }
+        }
+    }
+
+
     public static class GetSubmission
     {
         public class Query : IRequest<SubmissionDto>

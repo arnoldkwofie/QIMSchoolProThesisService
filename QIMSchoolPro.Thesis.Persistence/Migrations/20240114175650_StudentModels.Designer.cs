@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using QIMSchoolPro.Thesis.Persistence;
@@ -11,9 +12,11 @@ using QIMSchoolPro.Thesis.Persistence;
 namespace QIMSchoolPro.Thesis.Persistence.Migrations
 {
     [DbContext(typeof(ThesisDbContext))]
-    partial class ThesisDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240114175650_StudentModels")]
+    partial class StudentModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -727,8 +730,8 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
 
                     b.OwnsOne("QIMSchoolPro.Students.Domain.ValueObjects.YearGroup", "YearGroup", b1 =>
                         {
-                            b1.Property<int>("StudentId")
-                                .HasColumnType("integer");
+                            //b1.Property<int>("StudentId")
+                            //    .HasColumnType("integer");
 
                             b1.Property<int>("AdmittedYear")
                                 .HasColumnType("integer");
@@ -736,18 +739,18 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
                             b1.Property<int>("ClassYear")
                                 .HasColumnType("integer");
 
-                            b1.HasKey("StudentId");
+                            //b1.HasKey("StudentId");
 
                             b1.ToTable("Student");
 
-                            b1.WithOwner()
-                                .HasForeignKey("StudentId");
+                            //b1.WithOwner()
+                            //    .HasForeignKey("StudentId");
                         });
 
                     b.OwnsOne("Qface.Domain.Shared.ValueObjects.Audit", "Audit", b1 =>
                         {
-                            b1.Property<int>("StudentId")
-                                .HasColumnType("integer");
+                            //b1.Property<int>("StudentId")
+                            //    .HasColumnType("integer");
 
                             b1.Property<DateTime>("Created")
                                 .HasColumnType("timestamp with time zone");
@@ -780,12 +783,12 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
                                 .IsRequired()
                                 .HasColumnType("text");
 
-                            b1.HasKey("StudentId");
+                            //b1.HasKey("StudentId");
 
                             b1.ToTable("Student");
 
-                            b1.WithOwner()
-                                .HasForeignKey("StudentId");
+                            //b1.WithOwner()
+                            //    .HasForeignKey("StudentId");
                         });
 
                     b.Navigation("Audit")

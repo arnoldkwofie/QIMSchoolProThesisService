@@ -8,11 +8,8 @@ using System.Threading.Tasks;
 
 namespace QIMSchoolPro.Thesis.Persistence.Interfaces
 {
-    public interface ISubmissionRepository : IRepository<Submission>
+    public interface IDepartmentRepository : IRepository<Department>
     {
-        Task<List<Submission>> GetUserSubmissions();
-        Task<Submission> Get(int id);
-
-        Task<List<Submission>> GetDepartmentSubmissions(int departmentId);
+       
     }
 }

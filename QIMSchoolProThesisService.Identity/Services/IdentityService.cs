@@ -42,7 +42,7 @@ namespace QIMSchoolProThesisService.Identity.Services
 		public const string Profile = "profile";
 		public const string Picture = "picture";
 		public const string WebSite = "website";
-		public const string Email = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress";
+		public const string Email = "email";
 
 		public const string EmailVerified = "email_verified";
 
@@ -118,7 +118,11 @@ namespace QIMSchoolProThesisService.Identity.Services
 
 		public string GetEmail()
 		{
-			return _context.HttpContext?.User?.FindFirstValue(JwtClaimTypes.Email);
+			var myuser = _context.HttpContext?.User;
+			return myuser?.FindFirstValue(JwtClaimTypes.Email);
+
 		}
+
+
 	}
 }

@@ -26,6 +26,11 @@ namespace QIMSchoolPro.Thesis.Persistence.Repositories
             return await GetBaseQuery().ToListAsync();
         }
 
+        public async Task<List<Submission>> GetDepartmentSubmissions(int departmentId)
+        {
+            var data= await GetBaseQuery().Where(a=>a.Student.ProgrammeId==departmentId).ToListAsync();
+            return data;
+        }
         public async Task<Submission> Get(int id)
         {
             return await GetBaseQuery().Where(a => a.Id == id).FirstOrDefaultAsync();
@@ -33,10 +38,11 @@ namespace QIMSchoolPro.Thesis.Persistence.Repositories
 
         public override IQueryable<Submission> GetBaseQuery()
         {
-            return base.GetBaseQuery()
+            var data= base.GetBaseQuery()
                 .Include(a => a.Documents).ThenInclude(a => a.Versions)
-                .Include(a=>a.SubmissionHistories);
-               
+                .Include(a=>a.SubmissionHistories)
+                .Include(a=>a.Student).ThenInclude(a=>a.Programme);
+               return data;
         }
 
     }
