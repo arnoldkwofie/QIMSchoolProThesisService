@@ -5,6 +5,7 @@ using Qface.Application.Shared.Dtos;
 
 using Qface.Domain.Shared.ValueObjects;
 using QIMSchoolPro.Thesis.Domain.Entities;
+using QIMSchoolPro.Thesis.Persistence.Configurations;
 using Version = QIMSchoolPro.Thesis.Domain.Entities.Version;
 
 namespace QIMSchoolPro.Students.Processors.Mappings
@@ -19,6 +20,10 @@ namespace QIMSchoolPro.Students.Processors.Mappings
 			CreateMap<Version, VersionDto>().ReverseMap();
 			CreateMap<SubmissionHistory, SubmissionHistoryDto>().ReverseMap();
 			CreateMap<ThesisAssignment, ThesisAssignmentDto>().ReverseMap();
+			CreateMap<Student, StudentDto>().ReverseMap();
+			CreateMap<Programme, ProgrammeDto>().ReverseMap();
+			CreateMap<Department, DepartmentDto>().ReverseMap();
+			CreateMap<Party, PartyDto>().ReverseMap();
 			
 			
 		}

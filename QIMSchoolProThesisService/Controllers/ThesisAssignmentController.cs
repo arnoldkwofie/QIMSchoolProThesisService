@@ -24,7 +24,7 @@ namespace QIMSchoolProThesisService.Controllers
 		[HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IEnumerable<ThesisAssignmentDto>> GetByStaffId(string id)
+        public async Task<IEnumerable<ThesisAssignmentDto>> GetByStaffId(int id)
         {
             return await Mediator.Send(new GetByStaffId.Query(id));
         }

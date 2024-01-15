@@ -31,7 +31,8 @@ namespace QIMSchoolPro.Thesis.Persistence.Repositories
         public override IQueryable<ThesisAssignment> GetBaseQuery()
         {
             return base.GetBaseQuery()
-                .Include(a=>a.Submission);
+                .Include(a => a.Submission)
+                .Include(a => a.Staff);
                 
 
         }

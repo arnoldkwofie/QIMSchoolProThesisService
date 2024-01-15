@@ -6,6 +6,7 @@ using QIMSchoolPro.Thesis.Domain.Enums;
 using QIMSchoolPro.Thesis.Domain.ValueObjects;
 using QIMSchoolPro.Thesis.Persistence.Interfaces;
 using QIMSchoolPro.Thesis.Processors.Constants;
+using QIMSchoolPro.Thesis.Processors.Services;
 using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using Version = QIMSchoolPro.Thesis.Domain.Entities.Version;
 
 namespace QIMSchoolPro.Thesis.Processors.Processors
@@ -27,10 +29,11 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
         private readonly ISubmissionHistoryRepository _submissionHistoryRepository;
         private readonly IIdentityService _identityService;
         private readonly IStaffRepository _staffRepository;
+        private readonly IStudentRepository _studentRepository;
 
         public SubmissionProcessor(ISubmissionRepository submissionRepository, IDocumentRepository documentRepository,
             IVersionRepository versionRepository, IMapper mapper, ISubmissionHistoryRepository submissionHistoryRepository,
-            IIdentityService identityService, IStaffRepository staffRepository)
+            IIdentityService identityService, IStaffRepository staffRepository, IStudentRepository studentRepository)
         {
             _submissionRepository = submissionRepository;
             _documentRepository = documentRepository;
@@ -39,6 +42,7 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
             _submissionHistoryRepository = submissionHistoryRepository;
             _identityService = identityService; 
             _staffRepository= staffRepository;
+            _studentRepository= studentRepository;
 
         }
 
@@ -87,8 +91,8 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
                 var submission= await _submissionRepository.GetAsync(command.Id);
                 if (submission != null)
                 {
-					var academicPeriod = AcademicPeriod.Create("2022/2023", Semester.FirstSemester);
-                    var postSubmission = submission.Update(command.Abstract, command.Title, TransitionState.Department_Review, DateTime.UtcNow, academicPeriod);
+					//var academicPeriod = AcademicPeriod.Create("2022/2023", Semester.FirstSemester);
+                    var postSubmission = submission.Update(command.Abstract, command.Title, TransitionState.Department_Review, DateTime.UtcNow);
                     await _submissionRepository.UpdateAsync(postSubmission);
 				}
             
@@ -104,15 +108,24 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
         {
             try
             {
-                var data = await _submissionRepository.GetUserSubmissions();
-                var dd = _mapper.Map<List<SubmissionDto>>(data);
-                return dd;
+                //var email = _identityService.GetEmail();
+                var email = "student@localhost.com";
+
+                var student = await _studentRepository.GetStudentByEmail(email);
+                if (student != null) 
+                {
+                    var data = await _submissionRepository.GetUserSubmissions(student.StudentNumber);
+                    var dd = _mapper.Map<List<SubmissionDto>>(data);
+                    return dd;
+                }
+                return null;
+                
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
-            
+
         }
 
         public async Task<List<SubmissionDto>> GetDepartmentSubmissions()
@@ -122,9 +135,26 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
                 //var email = _identityService.GetEmail();
                 var email = "department@localhost.com";
 
-                var staff= await _staffRepository.GetStaffByEmail(email);
+                var staff = await _staffRepository.GetStaffByEmail(email);
 
                 var submissions = await _submissionRepository.GetDepartmentSubmissions(staff.DepartmentId);
+
+                var dd = _mapper.Map<List<SubmissionDto>>(submissions);
+                return dd;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+        }
+
+        public async Task<List<SubmissionDto>> GetSPSSubmissions()
+        {
+            try
+            {
+                
+                var submissions = await _submissionRepository.GetSPSSubmissions();
 
                 var dd = _mapper.Map<List<SubmissionDto>>(submissions);
                 return dd;
@@ -143,6 +173,39 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
                 var data = await _submissionRepository.Get(id);
                 var dd = _mapper.Map<SubmissionDto>(data);
                 return dd;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+        }
+
+
+        public async Task DepartmentApproval(int submissionId, int approvalId)
+        {
+            try
+            {
+                var submission = await _submissionRepository.GetAsync(submissionId);
+
+
+
+                if ((ReviewDecision)approvalId == ReviewDecision.Approve)
+                {
+                    var approve = submission.Transit(TransitionState.SPS_Review);
+                    await _submissionRepository.UpdateAsync(approve);
+
+                    //TestMessage.Send("Your thesis has been approved by department", "233247761922");
+                }
+                else
+                {
+                    var reject = submission.Transit(TransitionState.Created);
+                    await _submissionRepository.UpdateAsync(reject);
+                    //get notification
+
+                }
+
+
             }
             catch (Exception ex)
             {

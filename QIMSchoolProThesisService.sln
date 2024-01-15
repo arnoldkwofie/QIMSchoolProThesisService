@@ -8,6 +8,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{7861DBE2-FE9E-4BD7-888D-D7793C896103}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infractructure", "Infractructure", "{CA2F6FFF-69B0-49B5-8766-2CD5E4F51F59}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\Downloads\Zenoph.Notify\Zenoph.Notify.dll = ..\..\..\Downloads\Zenoph.Notify\Zenoph.Notify.dll
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{C83037F0-FBB7-4D94-BB98-EE5B228664A6}"
 EndProject
@@ -33,7 +36,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qface.Application.Shared", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qface.Persistence.EntityFramework.Extensions", "Qface.Persistence.EntityFramework.Extensions\Qface.Persistence.EntityFramework.Extensions.csproj", "{8681270D-5CE3-497B-8E6E-B7CD6EC50BA0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIMSchoolProThesisService.Identity", "QIMSchoolProThesisService.Identity\QIMSchoolProThesisService.Identity.csproj", "{A0AF57AC-CC83-4AC1-AEEE-CF4A8B7BA822}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QIMSchoolProThesisService.Identity", "QIMSchoolProThesisService.Identity\QIMSchoolProThesisService.Identity.csproj", "{A0AF57AC-CC83-4AC1-AEEE-CF4A8B7BA822}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

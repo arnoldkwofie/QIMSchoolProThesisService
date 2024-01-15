@@ -11,5 +11,6 @@ namespace QIMSchoolPro.Thesis.Persistence.Interfaces
     public interface IStaffRepository : IRepository<Staff>
     {
         Task<Staff> GetStaffByEmail(string email);
+        Task<List<Staff>> GetStaffInDepartment(int departmentId);
     }
 }

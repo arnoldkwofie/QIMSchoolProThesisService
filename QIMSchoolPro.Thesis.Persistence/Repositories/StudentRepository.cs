@@ -21,11 +21,16 @@ namespace QIMSchoolPro.Thesis.Persistence.Repositories
             Logger = logger;
         }
 
-
-
+        public async Task<Student> GetStudentByEmail(string email)
+        {
+            var data = await GetBaseQuery().Where(a => a.Party.PrimaryEmailAddress.Email.Value == email).FirstOrDefaultAsync();
+            return data;
+         }
         public override IQueryable<Student> GetBaseQuery()
         {
-            return base.GetBaseQuery();
+            return base.GetBaseQuery()
+                .Include(a=>a.Programme).ThenInclude(a=>a.Department)
+                .Include(a=>a.Party);
                
 
         }

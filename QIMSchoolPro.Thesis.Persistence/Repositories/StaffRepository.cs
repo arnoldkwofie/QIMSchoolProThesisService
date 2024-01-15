@@ -27,6 +27,12 @@ namespace QIMSchoolPro.Thesis.Persistence.Repositories
             return GetBaseQuery().Where(a => a.Party.PrimaryEmailAddress.Email.Value == email).FirstOrDefault();
         }
 
+        public async Task<List<Staff>> GetStaffInDepartment(int departmentId)
+        { 
+          var data= GetBaseQuery().Where(a=>a.DepartmentId==departmentId).ToList();
+            return data;
+        }
+
         public override IQueryable<Staff> GetBaseQuery()
         {
             return base.GetBaseQuery()

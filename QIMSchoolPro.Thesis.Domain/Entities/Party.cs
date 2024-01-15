@@ -30,7 +30,7 @@ namespace QIMSchoolPro.Thesis.Domain.Entities
 		//public virtual ICollection<Student> Students { get; set; }
 		//public virtual ICollection<Applicant> Applicants { get; set; }
 
-		public virtual ICollection<Staff> Staffs { get; set; }
+		//public virtual ICollection<Staff> Staffs { get; set; }
 		public Party()
 		{
 		}

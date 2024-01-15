@@ -52,13 +52,13 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
             }
         }
 
-        public async Task<List<ThesisAssignmentDto>> GetByStaffId(string staffId)
+        public async Task<List<ThesisAssignmentDto>> GetByStaffId(int staffId)
         {
 
             var email = _identityService.GetEmail();
 
             //use email to get staffId
-           var data = await _thesisAssignmentRepository.GetByStaffId(1);
+           var data = await _thesisAssignmentRepository.GetByStaffId(staffId);
 
             return _mapper.Map<List<ThesisAssignmentDto>>(data);
         }

@@ -10,9 +10,9 @@ namespace QIMSchoolPro.Thesis.Persistence.Interfaces
 {
     public interface ISubmissionRepository : IRepository<Submission>
     {
-        Task<List<Submission>> GetUserSubmissions();
+        Task<List<Submission>> GetUserSubmissions(string studentNumber);
         Task<Submission> Get(int id);
-
+        Task<List<Submission>> GetSPSSubmissions();
         Task<List<Submission>> GetDepartmentSubmissions(int departmentId);
     }
 }

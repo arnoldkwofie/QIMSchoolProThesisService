@@ -15,4 +15,10 @@
     <ProjectReference Include="..\QIMSchoolPro.Thesis.Persistence\QIMSchoolPro.Thesis.Persistence.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Zenoph.Notify">
+      <HintPath>..\..\..\..\..\..\Zenoph.Notify.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

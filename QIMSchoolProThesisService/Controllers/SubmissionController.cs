@@ -36,6 +36,15 @@ namespace QIMSchoolProThesisService.Controllers
             return await Mediator.Send(new GetUserSubmissions.Query());
         }
 
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> DepartmentApproval(int submissionid, int approvalId)
+        {
+            await Mediator.Send(new DeapartmentApproval.Query(submissionid, approvalId));
+           return NoContent();
+        }
+
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -45,6 +54,13 @@ namespace QIMSchoolProThesisService.Controllers
             return await Mediator.Send(new GetDepartmentSubmissions.Query());
         }
 
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IEnumerable<SubmissionDto>> GetSPSSubmissions()
+        {
+            return await Mediator.Send(new GetSPSSubmissions.Query());
+        }
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]

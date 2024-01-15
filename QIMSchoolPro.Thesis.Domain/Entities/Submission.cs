@@ -3,6 +3,8 @@ using QIMSchoolPro.Thesis.Domain.Enums;
 using QIMSchoolPro.Thesis.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +14,9 @@ namespace QIMSchoolPro.Thesis.Domain.Entities
     public class Submission : AuditableAutoEntity
     {
         public int Id { get; set; }
-        //public string StudentNumber { get; set; }
+        [ForeignKey(nameof(Student))]
+        public string StudentNumber { get; set; }
+        //[NotMapped]
         public Student Student { get; set; }
         public string Title { get; set; }
         public string Abstract { get; set; }
@@ -28,7 +32,7 @@ namespace QIMSchoolPro.Thesis.Domain.Entities
 
         public Submission(string studentNumber, string _abstract, string title, TransitionState transitionState, DateTime submissionDate, AcademicPeriod academicPeriod)
         {
-            //StudentNumber = studentNumber;
+            StudentNumber = studentNumber;
             Abstract = _abstract;
             Title = title;
             TransitionState = transitionState;
@@ -43,14 +47,21 @@ namespace QIMSchoolPro.Thesis.Domain.Entities
             );
         }
 
-		public Submission Update(string _abstract, string title, TransitionState transitionState, DateTime submissionDate, AcademicPeriod academicPeriod)
+		public Submission Update(string _abstract, string title, TransitionState transitionState, DateTime submissionDate)
 		{
 			Abstract = _abstract;
 			Title = title;
             TransitionState=transitionState;
             SubmissionDate = submissionDate;
-            AcademicPeriod = academicPeriod;
+            
 			return this;
 		}
-	}
+
+        public Submission Transit(TransitionState transitionState)
+        {
+            TransitionState = transitionState;
+
+            return this;
+        }
+    }
 }

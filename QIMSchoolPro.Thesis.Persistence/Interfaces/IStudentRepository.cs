@@ -10,6 +10,6 @@ namespace QIMSchoolPro.Thesis.Persistence.Interfaces
 {
     public interface IStudentRepository : IRepository<Student>
     {
-        
+        Task<Student> GetStudentByEmail(string email);
     }
 }
