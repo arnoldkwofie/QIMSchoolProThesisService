@@ -5,6 +5,7 @@
 
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 using QIMSchoolPro.Thesis.Domain.Entities;
 using QIMSchoolPro.Thesis.Domain.Enums;
 using QIMSchoolPro.Thesis.Domain.ValueObjects;
@@ -32,6 +33,27 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
             _mapper = mapper;
         }
 
+        public async Task<StudentDto> GetStudentByEmail(string id)
+        {
+            //var student = await GetStudentInCache(id);
+            //if (student == null)
+            //{
+                var studentFromDB =  await _studentRepository.GetStudentByEmail(id);
+            if (studentFromDB == null)
+                    return null;
+            // studentFromDB.PhotoUrl = _photoService.GetStudentPhotoUrl(id);
+            StudentDto student = _mapper.Map<StudentDto>(studentFromDB);
+
+                //var hasBeCached = await _database.StringSetAsync(RedisKeys.GetStudentKey(id), JsonConvert.SerializeObject(student), TimeSpan.FromHours(4));
+                //if (hasBeCached)
+                //{
+                //    _logger.LogInformation("student with Id {0} has been cache for 2 hrs", id);
+                //}
+       
+
+            return student;
+
+        }
 
         public async Task<StudentDto> Get(int Id)
         {

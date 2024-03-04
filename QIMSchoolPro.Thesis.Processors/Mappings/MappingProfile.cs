@@ -24,6 +24,7 @@ namespace QIMSchoolPro.Students.Processors.Mappings
 			CreateMap<Programme, ProgrammeDto>().ReverseMap();
 			CreateMap<Department, DepartmentDto>().ReverseMap();
 			CreateMap<Party, PartyDto>().ReverseMap();
+			CreateMap<Staff, StaffDto>().ReverseMap();
 			
 			
 		}

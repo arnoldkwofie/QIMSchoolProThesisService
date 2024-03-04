@@ -9,6 +9,10 @@ using System.Reflection;
 using QIMSchoolPro.Thesis.Persistence;
 using QIMSchoolPro.Thesis.Application;
 using QIMSchoolPro.Thesis.Processors;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.Extensions.Options;
 
 namespace QIMSchoolProThesisService
 {
@@ -22,8 +26,21 @@ namespace QIMSchoolProThesisService
                 .InstallSwagger(configuration)
                 .AddCore(configuration)
                 .AddInfrastructure(configuration)
-                .AddProcessors();
-           
+                .AddProcessors()
+                .AddHttpClient(); 
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+             .AddJwtBearer(options =>
+             {
+                 options.TokenValidationParameters = new TokenValidationParameters
+                 {
+                     ValidateIssuerSigningKey = true,
+                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration["Jwt:Secret"])),
+                     ValidateIssuer = false,
+                     ValidateAudience = false
+                 };
+             });
+
         }
         private static IServiceCollection InstallDefaults(this IServiceCollection services)
         {
@@ -46,7 +63,16 @@ namespace QIMSchoolProThesisService
                     .AllowAnyMethod()
                     .AllowAnyHeader();
                 });
+
+                //options.AddDefaultPolicy(opts =>
+                //{
+                //    opts.WithOrigins("http://localhost:3000")
+                //        .AllowAnyMethod()
+                //        .AllowAnyHeader();
+                //});
             });
+
+          
             return services;
         }
 

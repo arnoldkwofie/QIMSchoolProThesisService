@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\QIMSchoolPro.Thesis.Application\QIMSchoolPro.Thesis.Application.csproj" />
+    <ProjectReference Include="..\QIMSchoolPro.Thesis.Infrastructure\QIMSchoolPro.Thesis.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

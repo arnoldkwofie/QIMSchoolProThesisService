@@ -14,10 +14,11 @@ namespace QIMSchoolPro.Thesis.Application.Features.MySubmission.Commands
       
         public class Command : IRequest
         {
-            public string StudentNumber { get; set; }
+            
             public string Title { get; set; }
             public string Abstract { get; set; }
             public IFormFile PrimaryFile { get; set; }
+            public IFormFile ThesisForm { get; set; }
             public IFormFile SecondaryFile { get; set; }
 
         }
@@ -33,7 +34,7 @@ namespace QIMSchoolPro.Thesis.Application.Features.MySubmission.Commands
             }
             public async Task Handle(Command request, CancellationToken cancellationToken)
             {
-                await _submissionprocessor.Create(request.StudentNumber, request.Title, request.Abstract, request.PrimaryFile, request.SecondaryFile, cancellationToken);
+                await _submissionprocessor.Create(request.Title, request.Abstract, request.PrimaryFile, request.ThesisForm, request.SecondaryFile, cancellationToken);
             }
         }
 

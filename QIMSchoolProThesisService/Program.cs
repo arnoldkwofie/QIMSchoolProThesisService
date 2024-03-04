@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.RegisterServices(builder.Configuration, builder.Environment);
 builder.Services.RegisterAutoMapper();
-builder.Services.ConfigureIdentityServices(builder.Configuration);
+//builder.Services.ConfigureIdentityServices(builder.Configuration);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -27,6 +27,19 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseSwagger();
+app.UseSwaggerUI(
+    c =>
+    {
+        string swaggerJsonBasePath = string.IsNullOrWhiteSpace(c.RoutePrefix) ? "." : "..";
+        c.SwaggerEndpoint($"{swaggerJsonBasePath}/swagger/v1/swagger.json", "Thesis Project");
+    });
+
+app.Use(async (context, next) =>
+{
+    context.Response.Headers.Add("Access-Control-Allow-Origin", "*"); // Replace '' with specific origins if needed
+    await next();
+});
 
 app.UseHttpsRedirection();
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using QIMSchoolPro.Thesis.Application.Features.MySubmission.Commands;
 using QIMSchoolPro.Thesis.Application.Features.MySubmission.Queries;
 using QIMSchoolPro.Thesis.Application.Features.MyThesisAssignment.ThesisAssignmentCommands;
@@ -7,6 +8,7 @@ using QIMSchoolProThesisService.Controllers.Base;
 
 namespace QIMSchoolProThesisService.Controllers
 {
+    [Authorize]
     public class SubmissionController : BaseController
     {
         [HttpPost]

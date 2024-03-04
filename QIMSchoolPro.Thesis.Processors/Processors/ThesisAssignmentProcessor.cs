@@ -22,13 +22,13 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
     {
         private readonly IThesisAssignmentRepository _thesisAssignmentRepository;
         private readonly IMapper _mapper;
-        private readonly IIdentityService _identityService;
+        //private readonly IIdentityService _identityService;
 
-        public ThesisAssignmentProcessor(IThesisAssignmentRepository thesisAssignmentRepository, IMapper mapper, IIdentityService identityService)
+        public ThesisAssignmentProcessor(IThesisAssignmentRepository thesisAssignmentRepository, IMapper mapper)
         {
             _thesisAssignmentRepository = thesisAssignmentRepository;
             _mapper = mapper;
-            _identityService = identityService;
+            //_identityService = identityService;
         }
 
         public async Task Create(ThesisAssignmentCommand command, CancellationToken cancellationToken)
@@ -55,7 +55,7 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
         public async Task<List<ThesisAssignmentDto>> GetByStaffId(int staffId)
         {
 
-            var email = _identityService.GetEmail();
+            //var email = _identityService.GetEmail();
 
             //use email to get staffId
            var data = await _thesisAssignmentRepository.GetByStaffId(staffId);

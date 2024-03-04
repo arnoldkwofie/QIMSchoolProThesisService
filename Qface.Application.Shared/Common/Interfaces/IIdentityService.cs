@@ -9,5 +9,7 @@ namespace Qface.Application.Shared.Common.Interfaces
 	public interface IIdentityService
 	{
 		string GetEmail();
-	}
+		string GetUserName();
+
+    }
 }

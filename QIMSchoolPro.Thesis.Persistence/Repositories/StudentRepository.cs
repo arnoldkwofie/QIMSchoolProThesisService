@@ -23,9 +23,16 @@ namespace QIMSchoolPro.Thesis.Persistence.Repositories
 
         public async Task<Student> GetStudentByEmail(string email)
         {
-            var data = await GetBaseQuery().Where(a => a.Party.PrimaryEmailAddress.Email.Value == email).FirstOrDefaultAsync();
+            //var data = await GetBaseQuery().Where(a => a.Party.PrimaryEmailAddress.Email.Value == email).FirstOrDefaultAsync();
+            var data = await GetBaseQuery().Where(a => a.StudentNumber == email).FirstOrDefaultAsync();
             return data;
          }
+
+        //public async Task<Student> GetStudentByStud(string email)
+        //{
+        //    var data = await GetBaseQuery().Where(a => a.Party.PrimaryEmailAddress.Email.Value == email).FirstOrDefaultAsync();
+        //    return data;
+        //}
         public override IQueryable<Student> GetBaseQuery()
         {
             return base.GetBaseQuery()

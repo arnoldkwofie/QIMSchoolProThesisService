@@ -12,6 +12,7 @@ using Microsoft.IdentityModel.Tokens;
 using Qface.Application.Shared.Common.Interfaces;
 using QIMSchoolPro.Thesis.Application.Contracts.Identity;
 using QIMSchoolPro.Thesis.Application.Models.Identity;
+using QIMSchoolPRO.Thesis.Infrastructure.Identity;
 using QIMSchoolProThesisService.Identity.Models;
 using QIMSchoolProThesisService.Identity.Services;
 

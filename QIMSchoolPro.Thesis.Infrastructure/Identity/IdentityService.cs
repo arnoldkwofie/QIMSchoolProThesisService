@@ -1,14 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Qface.Application.Shared.Common.Interfaces;
-using QIMSchoolPro.Thesis.Application.Contracts.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace QIMSchoolProThesisService.Identity.Services
+
+using System.Security.Claims;
+
+
+namespace QIMSchoolPRO.Thesis.Infrastructure.Identity
 {
 
 	public static class JwtClaimTypes
@@ -118,11 +115,19 @@ namespace QIMSchoolProThesisService.Identity.Services
 
 		public string GetEmail()
 		{
-			var myuser = _context.HttpContext?.User;
-			return myuser?.FindFirstValue(JwtClaimTypes.Email);
+            return _context.HttpContext?.User?.FindFirst(ClaimTypes.Email).Value;
 
-		}
+        }
+		
+
+        public string GetUserName()
+        {
+
+            string userName = _context.HttpContext?.User?.FindFirst(ClaimTypes.Name).Value;
+            return userName;
+
+        }
 
 
-	}
+    }
 }

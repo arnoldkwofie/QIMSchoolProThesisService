@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Qface.Application.Shared.Common.Interfaces;
 using QIMSchoolPro.Thesis.Persistence.Interfaces;
 using QIMSchoolPro.Thesis.Persistence.Repositories;
+using QIMSchoolPRO.Thesis.Infrastructure.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,7 +50,9 @@ namespace QIMSchoolPro.Thesis.Persistence
             services.AddScoped<IStudentRepository, StudentRepository>();
             services.AddScoped<IProgrammeRepository, ProgrammeRepository>();
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
-                
+            services.AddScoped<IAcademicConfigurationRepository, AcademicConfigurationRepository>();
+            services.AddTransient<IIdentityService, IdentityService>();
+
             return services;
         }
     }

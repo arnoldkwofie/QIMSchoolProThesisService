@@ -30,10 +30,12 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
         private readonly IIdentityService _identityService;
         private readonly IStaffRepository _staffRepository;
         private readonly IStudentRepository _studentRepository;
+        private readonly IAcademicConfigurationRepository _academicConfigurationRepository;
 
         public SubmissionProcessor(ISubmissionRepository submissionRepository, IDocumentRepository documentRepository,
             IVersionRepository versionRepository, IMapper mapper, ISubmissionHistoryRepository submissionHistoryRepository,
-            IIdentityService identityService, IStaffRepository staffRepository, IStudentRepository studentRepository)
+             IStaffRepository staffRepository, IStudentRepository studentRepository, IIdentityService identityService,
+             IAcademicConfigurationRepository academicConfigurationRepository)
         {
             _submissionRepository = submissionRepository;
             _documentRepository = documentRepository;
@@ -43,17 +45,19 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
             _identityService = identityService; 
             _staffRepository= staffRepository;
             _studentRepository= studentRepository;
+            _academicConfigurationRepository = academicConfigurationRepository;
 
         }
 
-        public async Task Create(string studentNumber, string title, string _abstract, IFormFile primaryFile, IFormFile secondaryFile, CancellationToken cancellationToken)
+        public async Task Create( string title, string _abstract, IFormFile primaryFile, IFormFile thesisForm, IFormFile secondaryFile, CancellationToken cancellationToken)
         {
             try
             {
-                //generate system AcademicPeriod
-                studentNumber = "50012458723";
-                var academicPeriod = AcademicPeriod.Create("2022/2023", Semester.FirstSemester);
-                var submission = Submission.Create(studentNumber, _abstract, title, TransitionState.Created, DateTime.UtcNow, academicPeriod);
+                
+                var academicPeriod = await _academicConfigurationRepository.GetAcademicPeriodsAsync();
+                var studentNumber = _identityService.GetUserName();
+                
+                var submission = Submission.Create(studentNumber, _abstract, title, TransitionState.Created, DateTime.UtcNow, academicPeriod.AcademicPeriod);
                 await _submissionRepository.InsertAsync(submission, cancellationToken);
 
                 var submissionHistory = SubmissionHistory.Create(submission.Id, 1, Activity.CreateSubmission, DateTime.UtcNow);
@@ -67,6 +71,15 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
                     var version = Version.Create(document.Id, "v1", primaryFile.FileName, 1);
                     await _versionRepository.InsertAsync(version, cancellationToken);
                     
+                }
+                if (thesisForm != null)
+                {
+                    var document = Document.Create(submission.Id, DocumentType.Primary, "ThesisForm");
+                    await _documentRepository.InsertAsync(document, cancellationToken);
+
+                    var version = Version.Create(document.Id, "v1", primaryFile.FileName, 1);
+                    await _versionRepository.InsertAsync(version, cancellationToken);
+
                 }
                 if (secondaryFile != null)
                 {
@@ -108,17 +121,12 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
         {
             try
             {
-                //var email = _identityService.GetEmail();
-                var email = "student@localhost.com";
-
-                var student = await _studentRepository.GetStudentByEmail(email);
-                if (student != null) 
-                {
-                    var data = await _submissionRepository.GetUserSubmissions(student.StudentNumber);
+                var userame = _identityService.GetUserName();
+               
+                    var data = await _submissionRepository.GetUserSubmissions(userame);
                     var dd = _mapper.Map<List<SubmissionDto>>(data);
                     return dd;
-                }
-                return null;
+              
                 
             }
             catch (Exception ex)

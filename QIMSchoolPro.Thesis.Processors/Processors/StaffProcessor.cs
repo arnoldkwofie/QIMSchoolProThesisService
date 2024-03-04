@@ -57,6 +57,14 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
             }
         }
 
+        public async Task<StaffDto> GetStaffByEmail(string email)
+        {
+            var staff = await _staffRepository.GetStaffByEmail(email);
+            //AddStaffDetailToObject(staff);
+            return _mapper.Map<StaffDto>(staff);
+
+        }
+
     }
 
     public class StaffLookUpModel

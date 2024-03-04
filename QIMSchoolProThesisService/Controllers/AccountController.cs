@@ -1,30 +1,43 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using QIMSchoolPro.Thesis.Application.Contracts.Identity;
+using QIMSchoolPro.Thesis.Application.Features.MyUser.Queries;
 using QIMSchoolPro.Thesis.Application.Models.Identity;
+using QIMSchoolPro.Thesis.Processors.Processors;
+using QIMSchoolProThesisService.Controllers.Base;
 
 namespace QIMSchoolProThesisService.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class AccountController : ControllerBase
+    [Authorize]
+    public class AccountController : BaseController
     {
-        private readonly IAuthService _authenticationService;
-        public AccountController(IAuthService authenticationService)
+        //private readonly IAuthService _authenticationService;
+        public AccountController()
         {
-            _authenticationService = authenticationService;
+            
         }
 
-        [HttpPost("login")]
-        public async Task<ActionResult<AuthResponse>> Login(AuthRequest request)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpGet()]
+        public async Task<UserViewModel> UserInfo()
         {
-            return Ok(await _authenticationService.Login(request));
+
+            return await Mediator.Send(new GetLoginUser.Query());
         }
 
-        [HttpPost("register")]
-        public async Task<ActionResult<RegistrationResponse>> Register(RegistrationRequest request)
-        {
-            return Ok(await _authenticationService.Register(request));
-        }
+        //[HttpPost("login")]
+        //public async Task<ActionResult<AuthResponse>> Login(AuthRequest request)
+        //{
+        //    return Ok(await _authenticationService.Login(request));
+        //}
+
+        //[HttpPost("register")]
+        //public async Task<ActionResult<RegistrationResponse>> Register(RegistrationRequest request)
+        //{
+        //    return Ok(await _authenticationService.Register(request));
+        //}
     }
 }
