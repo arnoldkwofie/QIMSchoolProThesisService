@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace QIMSchoolPro.Thesis.Domain.Entities
 {
-    public class ProgrammeDto 
+    public class CertificateDto 
     {
         public int Id { get;  set; }
+        public string Code { get;  set; }
         public string Name { get;  set; }
-        public DepartmentDto Department { get;  set; }
-        public CertificateDto Certificate { get;  set; }
+       
 
     }
 }

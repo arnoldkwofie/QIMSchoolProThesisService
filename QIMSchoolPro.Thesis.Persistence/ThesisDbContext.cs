@@ -34,6 +34,7 @@ namespace QIMSchoolPro.Thesis.Persistence
         public DbSet<Student> Students { get; set; }
         public DbSet<Programme> Programmes { get; set; }
         public DbSet<Department> Departments { get; set; }
+        public DbSet<Certificate> Certificates { get; set; }
 
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())

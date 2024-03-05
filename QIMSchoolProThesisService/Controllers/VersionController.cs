@@ -18,6 +18,15 @@ namespace QIMSchoolProThesisService.Controllers
             return NoContent();
         }
 
-        
+        [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await Mediator.Send(new DeleteVersion.Command { Id = id });
+            return NoContent();
+        }
+
+
     }
 }

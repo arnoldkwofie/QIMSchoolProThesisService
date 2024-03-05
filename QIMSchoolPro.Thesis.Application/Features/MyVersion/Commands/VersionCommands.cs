@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using FluentValidation;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using QIMSchoolPro.Thesis.Processors.Processors;
 using System;
@@ -34,6 +35,40 @@ namespace QIMSchoolPro.Thesis.Application.Features.MyVersion.VersionCommands
             }
         }
 
+
+    }
+
+
+    public static class DeleteVersion
+    {
+
+        public class Command : IRequest<long>
+        {
+            public long Id { get; set; }
+        }
+
+        public class Handler : IRequestHandler<Command, long>
+        {
+            private readonly VersionProcessor _versionProcessor;
+
+            public Handler(VersionProcessor versionProcessor)
+            {
+                _versionProcessor = versionProcessor;
+            }
+            public async Task<long> Handle(Command request, CancellationToken cancellationToken)
+            {
+                await _versionProcessor.DeleteVersion(request.Id);
+
+                return request.Id;
+            }
+        }
+        public class Validator : AbstractValidator<Command>
+        {
+            public Validator()
+            {
+                RuleFor(x => x.Id).NotEmpty();
+            }
+        }
 
     }
 

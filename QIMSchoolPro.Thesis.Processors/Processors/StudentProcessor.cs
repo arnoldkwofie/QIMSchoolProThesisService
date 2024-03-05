@@ -33,12 +33,12 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
             _mapper = mapper;
         }
 
-        public async Task<StudentDto> GetStudentByEmail(string id)
+        public async Task<StudentDto> GetStudentByNumber(string id)
         {
             //var student = await GetStudentInCache(id);
             //if (student == null)
             //{
-                var studentFromDB =  await _studentRepository.GetStudentByEmail(id);
+                var studentFromDB =  await _studentRepository.GetStudentByNumber(id);
             if (studentFromDB == null)
                     return null;
             // studentFromDB.PhotoUrl = _photoService.GetStudentPhotoUrl(id);

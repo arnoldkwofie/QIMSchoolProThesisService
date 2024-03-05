@@ -49,6 +49,17 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
 
         }
 
+        public async Task DeleteSubmission(long id)
+        {
+            var submission = await _submissionRepository.GetAsync((int)id);
+            if (submission == null)
+            {
+                throw new Exception("Entry not Found");
+            }
+
+            await _submissionRepository.SoftDeleteAsync(submission);
+        }
+
         public async Task Create( string title, string _abstract, IFormFile primaryFile, IFormFile thesisForm, IFormFile secondaryFile, CancellationToken cancellationToken)
         {
             try
@@ -56,11 +67,13 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
                 
                 var academicPeriod = await _academicConfigurationRepository.GetAcademicPeriodsAsync();
                 var studentNumber = _identityService.GetUserName();
+
+                var student = await _studentRepository.GetStudentByNumber(studentNumber);
                 
                 var submission = Submission.Create(studentNumber, _abstract, title, TransitionState.Created, DateTime.UtcNow, academicPeriod.AcademicPeriod);
                 await _submissionRepository.InsertAsync(submission, cancellationToken);
 
-                var submissionHistory = SubmissionHistory.Create(submission.Id, 1, Activity.CreateSubmission, DateTime.UtcNow);
+                var submissionHistory = SubmissionHistory.Create(submission.Id, student.PartyId, Activity.CreateSubmission, DateTime.UtcNow);
                 await _submissionHistoryRepository.InsertAsync(submissionHistory, cancellationToken);
 
                 if (primaryFile != null)
@@ -104,12 +117,19 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
                 var submission= await _submissionRepository.GetAsync(command.Id);
                 if (submission != null)
                 {
-					//var academicPeriod = AcademicPeriod.Create("2022/2023", Semester.FirstSemester);
                     var postSubmission = submission.Update(command.Abstract, command.Title, TransitionState.Department_Review, DateTime.UtcNow);
                     await _submissionRepository.UpdateAsync(postSubmission);
-				}
-            
-            }catch (Exception ex)
+
+                    var studentNumber = _identityService.GetUserName();
+                    var student = await _studentRepository.GetStudentByNumber(studentNumber);
+
+                    var submissionHistory = SubmissionHistory.Create(submission.Id, student.PartyId, Activity.DepartmentReview, DateTime.UtcNow);
+                    await _submissionHistoryRepository.InsertAsync(submissionHistory, cancellationToken);
+
+                }
+
+            }
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
@@ -140,10 +160,10 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
         {
             try
             {
-                //var email = _identityService.GetEmail();
-                var email = "department@localhost.com";
+                var username = _identityService.GetUserName();
+                //var email = "department@localhost.com";
 
-                var staff = await _staffRepository.GetStaffByEmail(email);
+                var staff = await _staffRepository.GetStaffByEmail(username);
 
                 var submissions = await _submissionRepository.GetDepartmentSubmissions(staff.DepartmentId);
 

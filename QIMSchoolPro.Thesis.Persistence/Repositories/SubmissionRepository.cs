@@ -49,11 +49,12 @@ namespace QIMSchoolPro.Thesis.Persistence.Repositories
         {
             var data = base.GetBaseQuery()
                 .Include(a => a.Documents).ThenInclude(a => a.Versions)
-                .Include(a => a.SubmissionHistories)
+                .Include(a => a.SubmissionHistories.OrderByDescending(sh => sh.Id)) // Ordering SubmissionHistories
                 .Include(a => a.Student).ThenInclude(a => a.Programme).ThenInclude(a => a.Department)
+                .Include(a => a.Student).ThenInclude(a => a.Programme).ThenInclude(a=>a.Certificate)
                 .Include(a => a.Student).ThenInclude(a => a.Party);
-            
-               return data;
+
+            return data;
         }
 
     }

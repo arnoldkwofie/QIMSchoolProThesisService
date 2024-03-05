@@ -38,6 +38,8 @@ namespace QIMSchoolPro.Thesis.Domain.Entities
         //public Applicant Applicant { get; set; }
         //public long? ApplicantId { get; set; }
 
+        public AcademicCycle AcademicCycle { get; set; }
+
 
     }
 }

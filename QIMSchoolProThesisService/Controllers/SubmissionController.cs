@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using QIMSchoolPro.Thesis.Application.Features.MySubmission.Commands;
 using QIMSchoolPro.Thesis.Application.Features.MySubmission.Queries;
 using QIMSchoolPro.Thesis.Application.Features.MyThesisAssignment.ThesisAssignmentCommands;
+using QIMSchoolPro.Thesis.Application.Features.MyVersion.VersionCommands;
 using QIMSchoolPro.Thesis.Domain.Entities;
 using QIMSchoolProThesisService.Controllers.Base;
 
@@ -70,6 +71,15 @@ namespace QIMSchoolProThesisService.Controllers
         public async Task<SubmissionDto> Get(int id)
         {
             return await Mediator.Send(new GetSubmission.Query(id));
+        }
+
+        [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await Mediator.Send(new DeleteSubmission.Command { Id = id });
+            return NoContent();
         }
     }
 }

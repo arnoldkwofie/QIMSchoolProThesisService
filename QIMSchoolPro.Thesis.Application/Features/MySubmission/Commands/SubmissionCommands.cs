@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using FluentValidation;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using QIMSchoolPro.Thesis.Processors.Processors;
 using System;
@@ -71,7 +72,37 @@ namespace QIMSchoolPro.Thesis.Application.Features.MySubmission.Commands
 	}
 
 
+    public static class DeleteSubmission { 
 
+        public class Command : IRequest<long>
+        {
+            public long Id { get; set; }
+        }
+
+        public class Handler : IRequestHandler<Command, long>
+        {
+            private readonly SubmissionProcessor _submissionProcessor;
+
+            public Handler(SubmissionProcessor submissionprocessor)
+            {
+                _submissionProcessor = submissionprocessor;
+            }
+            public async Task<long> Handle(Command request, CancellationToken cancellationToken)
+            {
+                await _submissionProcessor.DeleteSubmission(request.Id);
+
+                return request.Id;
+            }
+        }
+        public class Validator : AbstractValidator<Command>
+        {
+            public Validator()
+            {
+                RuleFor(x => x.Id).NotEmpty();
+            }
+        }
+
+    }
 
 
 

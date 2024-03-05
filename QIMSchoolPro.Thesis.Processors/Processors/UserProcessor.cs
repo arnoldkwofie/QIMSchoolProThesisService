@@ -38,7 +38,7 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
                 {
 
                     //var refNo = _identityService.GetUserName();
-                    var student = await _studentProcessor.GetStudentByEmail(uid);
+                    var student = await _studentProcessor.GetStudentByNumber(uid);
                     if (student == null) return user;
                     //user.Name = student.Party.Name.FullNamev3;
                     user.FirstName = student.Party.Name.FirstName;

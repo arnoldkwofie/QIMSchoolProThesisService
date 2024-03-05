@@ -8,7 +8,7 @@ namespace QIMSchoolPro.Thesis.Processors.Constants
 {
     public class Activity
     {
-        public static string CreateSubmission = "You created this Submission";
+        public static string CreateSubmission = "Submission Created";
         public static string DepartmentReview = "submission is reviewed at department";
         public static string SPSReview = "submission is reviewed at SPS";
         public static string ExaminerReview = "submission is reviewed by examiner";

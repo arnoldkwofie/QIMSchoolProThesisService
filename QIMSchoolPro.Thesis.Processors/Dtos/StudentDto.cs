@@ -21,6 +21,7 @@ namespace QIMSchoolPro.Thesis.Domain.Entities
         public StudentSection StudentSection { get; set; }
         public ProgrammeDto Programme { get; private set; }
         public PartyDto Party { get; set; } 
+        public AcademicCycle AcademicCycle { get; set; } 
 
 
     }

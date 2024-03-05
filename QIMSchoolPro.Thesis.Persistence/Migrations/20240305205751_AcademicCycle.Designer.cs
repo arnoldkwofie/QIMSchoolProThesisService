@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using QIMSchoolPro.Thesis.Persistence;
@@ -11,9 +12,11 @@ using QIMSchoolPro.Thesis.Persistence;
 namespace QIMSchoolPro.Thesis.Persistence.Migrations
 {
     [DbContext(typeof(ThesisDbContext))]
-    partial class ThesisDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240305205751_AcademicCycle")]
+    partial class AcademicCycle
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -200,9 +203,6 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CertificateId")
-                        .HasColumnType("integer");
-
                     b.Property<int>("DepartmentId")
                         .HasColumnType("integer");
 
@@ -219,8 +219,6 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CertificateId");
 
                     b.HasIndex("DepartmentId");
 
@@ -831,12 +829,6 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
 
             modelBuilder.Entity("QIMSchoolPro.Thesis.Domain.Entities.Programme", b =>
                 {
-                    b.HasOne("QIMSchoolPro.Thesis.Domain.Entities.Certificate", "Certificate")
-                        .WithMany()
-                        .HasForeignKey("CertificateId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("QIMSchoolPro.Thesis.Domain.Entities.Department", "Department")
                         .WithMany()
                         .HasForeignKey("DepartmentId")
@@ -889,8 +881,6 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
 
                     b.Navigation("Audit")
                         .IsRequired();
-
-                    b.Navigation("Certificate");
 
                     b.Navigation("Department");
                 });
