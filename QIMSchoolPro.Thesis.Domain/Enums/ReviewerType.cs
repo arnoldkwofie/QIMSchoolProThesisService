@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace QIMSchoolPro.Thesis.Domain.Enums
 {
-    public enum ReviewerType
+    public enum AcademicCycle
     {
-        First_Internal_Examiner=1,
-        Second_Internal_Examiner,
-        Externa_Examiner
+        Normal=1,
+        JanAdmission,
+        JulyAdmission
     }
 }

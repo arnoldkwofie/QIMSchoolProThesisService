@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
+using QIMSchoolPro.Thesis.Domain.Entities;
 using QIMSchoolPro.Thesis.Processors.Processors;
 using Swashbuckle.AspNetCore.Annotations;
 using System;
@@ -37,7 +38,33 @@ namespace QIMSchoolPro.Thesis.Application.Features.MyThesisAssignment.ThesisAssi
     }
 
 
-	
+    public static class MakeDecision
+    {
+        public class Commandx : IRequest
+        {
+            public DecisionCommand command { get; set; }
+        }
+
+        public class Handler : IRequestHandler<Commandx>
+        {
+            private readonly ThesisAssignmentProcessor _thesisAssignmentProcessor;
+
+            public Handler(ThesisAssignmentProcessor thesisAssignmentProcessor)
+            {
+                _thesisAssignmentProcessor = thesisAssignmentProcessor;
+            }
+
+            public async Task Handle(Commandx request, CancellationToken cancellationToken)
+            {
+                await _thesisAssignmentProcessor.Decide(request.command);
+                
+            }
+        }
+    }
+
+
+
+
 
 
 

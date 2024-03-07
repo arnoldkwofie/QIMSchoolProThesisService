@@ -18,23 +18,38 @@ namespace QIMSchoolPro.Thesis.Domain.Entities
         public Submission Submission { get; set; }
         public int StaffId { get; set; }
         public Staff Staff { get; set; }
-        public bool Accepted { get; set; }
+        public ReviewDecision Decision { get; set; }
+        public ReviewerType ReviewerType { get; set; }
+        public int Trip { get; set; }
+        public DateTime Deadline { get; set; }
 
         public ThesisAssignment() 
         {
         }
 
-        public ThesisAssignment(int submissionId, int staffId)
+        public ThesisAssignment(int submissionId, int staffId, ReviewerType reviewerType, int trip, DateTime deadline, ReviewDecision decision)
         {
             SubmissionId = submissionId;
             StaffId = staffId;
+            ReviewerType = reviewerType;
+            Trip = trip;
+            Deadline = deadline;
+            Decision= decision;
         }
 
-        public static ThesisAssignment Create(int submissionId, int staffId)
+        public static ThesisAssignment Create(int submissionId, int staffId, ReviewerType reviewerType, int trip, DateTime deadline, ReviewDecision decision)
         {
             return new ThesisAssignment(
-                submissionId, staffId
-            );
+                submissionId, staffId, reviewerType, trip, deadline.ToUniversalTime(), decision
+            ) ;
+        }
+
+        public ThesisAssignment Decide(ReviewDecision decision)
+        {
+            Decision = decision;
+           
+
+            return this;
         }
     }
 }

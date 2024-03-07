@@ -9,6 +9,7 @@ namespace QIMSchoolPro.Thesis.Domain.Enums
     public enum ReviewDecision
     {
         Approve=1,
-        Reject
+        Reject,
+        Neutral
     }
 }

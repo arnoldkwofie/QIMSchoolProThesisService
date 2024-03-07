@@ -19,5 +19,7 @@ namespace QIMSchoolPro.Thesis.Domain.Entities
         public StaffDto Staff { get; set; }
         public bool Accepted { get; set; }
 
+        public DateTime Deadline { get; set; }
+
     }
 }

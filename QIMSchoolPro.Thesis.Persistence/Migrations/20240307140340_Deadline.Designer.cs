@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using QIMSchoolPro.Thesis.Persistence;
@@ -11,9 +12,11 @@ using QIMSchoolPro.Thesis.Persistence;
 namespace QIMSchoolPro.Thesis.Persistence.Migrations
 {
     [DbContext(typeof(ThesisDbContext))]
-    partial class ThesisDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240307140340_Deadline")]
+    partial class Deadline
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -145,71 +148,6 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
                     b.HasIndex("SubmissionId");
 
                     b.ToTable("Document", (string)null);
-                });
-
-            modelBuilder.Entity("QIMSchoolPro.Thesis.Domain.Entities.Grade", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("GradeParamId")
-                        .HasColumnType("integer");
-
-                    b.Property<decimal>("Marks")
-                        .HasColumnType("numeric");
-
-                    b.Property<string>("OtherProperty")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("OtherProperty1")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("ThesisAssignmentId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GradeParamId");
-
-                    b.HasIndex("ThesisAssignmentId");
-
-                    b.ToTable("Grade", (string)null);
-                });
-
-            modelBuilder.Entity("QIMSchoolPro.Thesis.Domain.Entities.GradeParam", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<decimal>("MaxMarks")
-                        .HasColumnType("numeric");
-
-                    b.Property<int>("Order")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("OtherProperty")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("OtherProperty1")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Section")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("GradeParam", (string)null);
                 });
 
             modelBuilder.Entity("QIMSchoolPro.Thesis.Domain.Entities.Party", b =>
@@ -459,11 +397,11 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<bool>("Accepted")
+                        .HasColumnType("boolean");
+
                     b.Property<DateTime>("Deadline")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<int>("Decision")
-                        .HasColumnType("integer");
 
                     b.Property<string>("OtherProperty")
                         .IsRequired()
@@ -781,122 +719,6 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
 
                             b1.WithOwner()
                                 .HasForeignKey("DocumentId");
-                        });
-
-                    b.Navigation("Audit")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("QIMSchoolPro.Thesis.Domain.Entities.Grade", b =>
-                {
-                    b.HasOne("QIMSchoolPro.Thesis.Domain.Entities.GradeParam", "GradeParam")
-                        .WithMany()
-                        .HasForeignKey("GradeParamId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("QIMSchoolPro.Thesis.Domain.Entities.ThesisAssignment", "ThesisAssignment")
-                        .WithMany()
-                        .HasForeignKey("ThesisAssignmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.OwnsOne("Qface.Domain.Shared.ValueObjects.Audit", "Audit", b1 =>
-                        {
-                            b1.Property<int>("GradeId")
-                                .HasColumnType("integer");
-
-                            b1.Property<DateTime>("Created")
-                                .HasColumnType("timestamp with time zone");
-
-                            b1.Property<string>("CreatedBy")
-                                .IsRequired()
-                                .HasColumnType("text");
-
-                            b1.Property<string>("EntityStatus")
-                                .HasColumnType("text");
-
-                            b1.Property<string>("EntityStatusCreateBy")
-                                .IsRequired()
-                                .HasColumnType("text");
-
-                            b1.Property<DateTime?>("EntityStatusCreated")
-                                .HasColumnType("timestamp with time zone");
-
-                            b1.Property<DateTime?>("EntityStatusLastModified")
-                                .HasColumnType("timestamp with time zone");
-
-                            b1.Property<string>("EntityStatusLastModifiedBy")
-                                .IsRequired()
-                                .HasColumnType("text");
-
-                            b1.Property<DateTime?>("LastModified")
-                                .HasColumnType("timestamp with time zone");
-
-                            b1.Property<string>("LastModifiedBy")
-                                .IsRequired()
-                                .HasColumnType("text");
-
-                            b1.HasKey("GradeId");
-
-                            b1.ToTable("Grade");
-
-                            b1.WithOwner()
-                                .HasForeignKey("GradeId");
-                        });
-
-                    b.Navigation("Audit")
-                        .IsRequired();
-
-                    b.Navigation("GradeParam");
-
-                    b.Navigation("ThesisAssignment");
-                });
-
-            modelBuilder.Entity("QIMSchoolPro.Thesis.Domain.Entities.GradeParam", b =>
-                {
-                    b.OwnsOne("Qface.Domain.Shared.ValueObjects.Audit", "Audit", b1 =>
-                        {
-                            b1.Property<int>("GradeParamId")
-                                .HasColumnType("integer");
-
-                            b1.Property<DateTime>("Created")
-                                .HasColumnType("timestamp with time zone");
-
-                            b1.Property<string>("CreatedBy")
-                                .IsRequired()
-                                .HasColumnType("text");
-
-                            b1.Property<string>("EntityStatus")
-                                .HasColumnType("text");
-
-                            b1.Property<string>("EntityStatusCreateBy")
-                                .IsRequired()
-                                .HasColumnType("text");
-
-                            b1.Property<DateTime?>("EntityStatusCreated")
-                                .HasColumnType("timestamp with time zone");
-
-                            b1.Property<DateTime?>("EntityStatusLastModified")
-                                .HasColumnType("timestamp with time zone");
-
-                            b1.Property<string>("EntityStatusLastModifiedBy")
-                                .IsRequired()
-                                .HasColumnType("text");
-
-                            b1.Property<DateTime?>("LastModified")
-                                .HasColumnType("timestamp with time zone");
-
-                            b1.Property<string>("LastModifiedBy")
-                                .IsRequired()
-                                .HasColumnType("text");
-
-                            b1.HasKey("GradeParamId");
-
-                            b1.ToTable("GradeParam");
-
-                            b1.WithOwner()
-                                .HasForeignKey("GradeParamId");
                         });
 
                     b.Navigation("Audit")

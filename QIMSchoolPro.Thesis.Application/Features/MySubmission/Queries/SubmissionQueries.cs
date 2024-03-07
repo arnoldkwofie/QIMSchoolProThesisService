@@ -65,7 +65,7 @@ namespace QIMSchoolPro.Thesis.Application.Features.MySubmission.Queries
             }
             public async Task Handle(Query request, CancellationToken cancellationToken)
             {
-                await _submissionprocessor.DepartmentApproval(request.SubmissionId, request.ApprovalId );
+                await _submissionprocessor.DepartmentApproval(request.SubmissionId, request.ApprovalId, cancellationToken);
             }
         }
 

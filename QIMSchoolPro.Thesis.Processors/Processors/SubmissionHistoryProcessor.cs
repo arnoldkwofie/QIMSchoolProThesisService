@@ -5,11 +5,13 @@ using QIMSchoolPro.Thesis.Domain.Enums;
 using QIMSchoolPro.Thesis.Domain.ValueObjects;
 using QIMSchoolPro.Thesis.Persistence.Interfaces;
 using QIMSchoolPro.Thesis.Persistence.Repositories;
+using QIMSchoolPro.Thesis.Processors.Constants;
 using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Version = QIMSchoolPro.Thesis.Domain.Entities.Version;
 
@@ -18,12 +20,12 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
     [ProcessorBase]
     public class SubmissionHistoryProcessor
     {
-        private readonly ISubmissionHistoryRepository _submissionHistoryProcessor;
+        private readonly ISubmissionHistoryRepository _submissionHistoryRepository;
         private readonly IMapper _mapper;
 
         public SubmissionHistoryProcessor(ISubmissionHistoryRepository submissionHistoryRepository, IMapper mapper)
         {
-            _submissionHistoryProcessor = submissionHistoryRepository;
+            _submissionHistoryRepository = submissionHistoryRepository;
             _mapper = mapper;
         }
 
@@ -32,7 +34,7 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
         {
             try
             {
-                var data = await _submissionHistoryProcessor.GetSubmissionHistoryBySubmissionId(id);
+                var data = await _submissionHistoryRepository.GetSubmissionHistoryBySubmissionId(id);
                 var dd = _mapper.Map<List<SubmissionHistoryDto>>(data);
                 return dd;
             }
@@ -41,6 +43,19 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
                 throw new Exception(ex.Message);
             }
 
+        }
+
+        public async Task SaveSubmissionHistory(int submissionId, int partyId, string activity, DateTime date, CancellationToken cancellationToken)
+        {
+            try
+            {
+                var submissionHistory = Domain.Entities.SubmissionHistory.Create(submissionId, partyId, activity, date);
+                await _submissionHistoryRepository.InsertAsync(submissionHistory, cancellationToken);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
     }

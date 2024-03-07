@@ -13,12 +13,11 @@ using QIMSchoolPro.Thesis.Domain.ValueObjects;
 
 namespace QIMSchoolPro.Thesis.Persistence.Configurations
 {
-    public class ThesisAssignmentConfiguration : IEntityTypeConfiguration<ThesisAssignment>
+    public class GradeConfiguration : IEntityTypeConfiguration<Grade>
     {
-        public void Configure(EntityTypeBuilder<ThesisAssignment> builder)
+        public void Configure(EntityTypeBuilder<Grade> builder)
         {
-            builder.ToTable(nameof(ThesisAssignment));
-            builder.HasOne(ta => ta.Submission);
+            builder.ToTable(nameof(Grade));
             builder.OwnsOne<Audit>(typeof(Audit).Name);
             builder.OwnsOne(e => e.Audit, b =>
             {

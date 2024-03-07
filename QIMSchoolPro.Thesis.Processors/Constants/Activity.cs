@@ -13,7 +13,7 @@ namespace QIMSchoolPro.Thesis.Processors.Constants
         public static string SPSReview = "submission is reviewed at SPS";
         public static string ExaminerReview = "submission is reviewed by examiner";
         public static string DepartmentReject = "submission is rejected at department";
-        public static string SPSReject = "submission is rejected at SPS";
+        //public static string SPSReject = "submission is rolled back by SPS";
         public static string SPSAssign = "submission is assigned to";
         public static string ExaminerReturn = "submission is reviewed and submitted to SPS";
         public static string SPSToDepartment = "submission is sent to Department by SPS";

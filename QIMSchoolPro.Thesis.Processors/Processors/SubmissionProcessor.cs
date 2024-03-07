@@ -5,6 +5,7 @@ using QIMSchoolPro.Thesis.Domain.Entities;
 using QIMSchoolPro.Thesis.Domain.Enums;
 using QIMSchoolPro.Thesis.Domain.ValueObjects;
 using QIMSchoolPro.Thesis.Persistence.Interfaces;
+using QIMSchoolPro.Thesis.Persistence.Migrations;
 using QIMSchoolPro.Thesis.Processors.Constants;
 using QIMSchoolPro.Thesis.Processors.Services;
 using Swashbuckle.AspNetCore.Annotations;
@@ -26,14 +27,14 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
         private readonly IDocumentRepository _documentRepository;
         private readonly IVersionRepository _versionRepository;
         private readonly IMapper _mapper;
-        private readonly ISubmissionHistoryRepository _submissionHistoryRepository;
+        private readonly SubmissionHistoryProcessor _submissionHistoryProcessor;
         private readonly IIdentityService _identityService;
         private readonly IStaffRepository _staffRepository;
         private readonly IStudentRepository _studentRepository;
         private readonly IAcademicConfigurationRepository _academicConfigurationRepository;
 
         public SubmissionProcessor(ISubmissionRepository submissionRepository, IDocumentRepository documentRepository,
-            IVersionRepository versionRepository, IMapper mapper, ISubmissionHistoryRepository submissionHistoryRepository,
+            IVersionRepository versionRepository, IMapper mapper, SubmissionHistoryProcessor submissionHistoryProcessor,
              IStaffRepository staffRepository, IStudentRepository studentRepository, IIdentityService identityService,
              IAcademicConfigurationRepository academicConfigurationRepository)
         {
@@ -41,7 +42,7 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
             _documentRepository = documentRepository;
             _versionRepository = versionRepository;
             _mapper = mapper;
-            _submissionHistoryRepository = submissionHistoryRepository;
+            _submissionHistoryProcessor = submissionHistoryProcessor;
             _identityService = identityService; 
             _staffRepository= staffRepository;
             _studentRepository= studentRepository;
@@ -70,12 +71,12 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
 
                 var student = await _studentRepository.GetStudentByNumber(studentNumber);
                 
-                var submission = Submission.Create(studentNumber, _abstract, title, TransitionState.Created, DateTime.UtcNow, academicPeriod.AcademicPeriod);
+                var submission = Submission.Create(studentNumber, _abstract, title, TransitionState.Created, DateTime.UtcNow, academicPeriod.AcademicPeriod, 1);
                 await _submissionRepository.InsertAsync(submission, cancellationToken);
 
-                var submissionHistory = SubmissionHistory.Create(submission.Id, student.PartyId, Activity.CreateSubmission, DateTime.UtcNow);
-                await _submissionHistoryRepository.InsertAsync(submissionHistory, cancellationToken);
+                await _submissionHistoryProcessor.SaveSubmissionHistory(submission.Id, student.PartyId, Activity.CreateSubmission, DateTime.UtcNow, cancellationToken);
 
+                
                 if (primaryFile != null)
                 {
                     var document = Document.Create(submission.Id, DocumentType.Primary, "PrimaryFile");
@@ -117,14 +118,14 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
                 var submission= await _submissionRepository.GetAsync(command.Id);
                 if (submission != null)
                 {
-                    var postSubmission = submission.Update(command.Abstract, command.Title, TransitionState.Department_Review, DateTime.UtcNow);
+                    var postSubmission = submission.Update(command.Abstract, command.Title, TransitionState.Department_Review, DateTime.UtcNow, submission.Trip);
                     await _submissionRepository.UpdateAsync(postSubmission);
 
                     var studentNumber = _identityService.GetUserName();
                     var student = await _studentRepository.GetStudentByNumber(studentNumber);
 
-                    var submissionHistory = SubmissionHistory.Create(submission.Id, student.PartyId, Activity.DepartmentReview, DateTime.UtcNow);
-                    await _submissionHistoryRepository.InsertAsync(submissionHistory, cancellationToken);
+                               await _submissionHistoryProcessor.SaveSubmissionHistory(submission.Id, student.PartyId, Activity.DepartmentReview, DateTime.UtcNow, cancellationToken);
+
 
                 }
 
@@ -210,25 +211,33 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
         }
 
 
-        public async Task DepartmentApproval(int submissionId, int approvalId)
+        public async Task DepartmentApproval(int submissionId, int approvalId, CancellationToken cancellationToken)
         {
             try
             {
                 var submission = await _submissionRepository.GetAsync(submissionId);
 
+                var email = _identityService.GetUserName();
+                var staff = await _staffRepository.GetStaffByEmail(email);
 
+
+               
 
                 if ((ReviewDecision)approvalId == ReviewDecision.Approve)
                 {
                     var approve = submission.Transit(TransitionState.SPS_Review);
                     await _submissionRepository.UpdateAsync(approve);
 
-                    //TestMessage.Send("Your thesis has been approved by department", "233247761922");
+                    await _submissionHistoryProcessor.SaveSubmissionHistory(submission.Id, staff.PartyId, Activity.SPSReview, DateTime.UtcNow, cancellationToken);
+
                 }
                 else
                 {
                     var reject = submission.Transit(TransitionState.Created);
                     await _submissionRepository.UpdateAsync(reject);
+
+                    await _submissionHistoryProcessor.SaveSubmissionHistory(submission.Id, staff.PartyId, Activity.DepartmentReject, DateTime.UtcNow, cancellationToken);
+
                     //get notification
 
                 }

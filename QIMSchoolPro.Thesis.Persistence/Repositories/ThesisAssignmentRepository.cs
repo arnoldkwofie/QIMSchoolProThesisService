@@ -2,14 +2,9 @@
 using QIMSchoolPro.Thesis.Domain.Entities;
 using QIMSchoolPro.Thesis.Persistence.Interfaces;
 using QIMSchoolPro.Thesis.Persistence.Repositories.Base;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
+
 using Version = QIMSchoolPro.Thesis.Domain.Entities.Version;
+using Microsoft.EntityFrameworkCore;
 
 namespace QIMSchoolPro.Thesis.Persistence.Repositories
 {
@@ -25,16 +20,21 @@ namespace QIMSchoolPro.Thesis.Persistence.Repositories
 
         public async Task<List<ThesisAssignment>> GetByStaffId(int staffId)
         {
-          return  GetBaseQuery().Where(a => a.StaffId == staffId).ToList();
+            return GetBaseQuery().
+               Where(a => a.StaffId == staffId).ToList();
         }
 
         public override IQueryable<ThesisAssignment> GetBaseQuery()
         {
             return base.GetBaseQuery()
-                .Include(a => a.Submission)
-                .Include(a => a.Staff);
+                  .Include(a => a.Staff)
+                  .Include(a => a.Submission).ThenInclude(a => a.Student).ThenInclude(a => a.Programme).ThenInclude(a => a.Department)
+                  .Include(a => a.Submission).ThenInclude(a => a.Student).ThenInclude(a => a.Programme).ThenInclude(a => a.Certificate)
+                  .Include(a => a.Submission).ThenInclude(a => a.Student).ThenInclude(a => a.Party)
+                  .Include(a => a.Submission).ThenInclude(a => a.Documents).ThenInclude(a => a.Versions);
                 
 
+            
         }
 
     }

@@ -22,6 +22,7 @@ namespace QIMSchoolPro.Thesis.Domain.Entities
         public string Abstract { get; set; }
         public TransitionState TransitionState { get; set; }
         public DateTime SubmissionDate { get; set; }
+        public int Trip { get; set; }
         public AcademicPeriod AcademicPeriod { get; set; }
         public List<Document> Documents { get; set; }   
         public List<SubmissionHistory> SubmissionHistories { get; set; }
@@ -30,7 +31,7 @@ namespace QIMSchoolPro.Thesis.Domain.Entities
         {
         }
 
-        public Submission(string studentNumber, string _abstract, string title, TransitionState transitionState, DateTime submissionDate, AcademicPeriod academicPeriod)
+        public Submission(string studentNumber, string _abstract, string title, TransitionState transitionState, DateTime submissionDate, AcademicPeriod academicPeriod, int trip)
         {
             StudentNumber = studentNumber;
             Abstract = _abstract;
@@ -38,21 +39,23 @@ namespace QIMSchoolPro.Thesis.Domain.Entities
             TransitionState = transitionState;
             SubmissionDate = submissionDate;
             AcademicPeriod = academicPeriod;
+            Trip = trip;
         }
 
-        public static Submission Create(string studentNumber, string _abstract, string title, TransitionState transitionState, DateTime submissionDate, AcademicPeriod academicPeriod)
+        public static Submission Create(string studentNumber, string _abstract, string title, TransitionState transitionState, DateTime submissionDate, AcademicPeriod academicPeriod, int trip)
         {
             return new Submission(
-                studentNumber, _abstract, title, transitionState, submissionDate, academicPeriod
+                studentNumber, _abstract, title, transitionState, submissionDate, academicPeriod, trip
             );
         }
 
-		public Submission Update(string _abstract, string title, TransitionState transitionState, DateTime submissionDate)
+		public Submission Update(string _abstract, string title, TransitionState transitionState, DateTime submissionDate, int trip)
 		{
 			Abstract = _abstract;
 			Title = title;
             TransitionState=transitionState;
             SubmissionDate = submissionDate;
+            Trip=trip;
             
 			return this;
 		}

@@ -12,16 +12,16 @@ namespace QIMSchoolPro.Thesis.Application.Features.MySubmission.Queries
 {
     
         public static class GetByStaffId
-    {
+        {
             public class Query : IRequest<IEnumerable<ThesisAssignmentDto>>
             {
-                public Query(int id)
+                public Query()
                 {
-                    Id= id;
+                  
                 }
-                public int Id { get; set; }
+            
 
-        }
+            }
 
             public class Handler : IRequestHandler<Query, IEnumerable<ThesisAssignmentDto>>
             {
@@ -34,11 +34,40 @@ namespace QIMSchoolPro.Thesis.Application.Features.MySubmission.Queries
 
                 public async Task<IEnumerable<ThesisAssignmentDto>> Handle(Query request, CancellationToken cancellationToken)
                 {
-                    var result = await _thesisAssignmentProcessor.GetByStaffId(request.Id);
+                    var result = await _thesisAssignmentProcessor.GetByStaffId();
                     return result;
                 }
             }
         }
 
-    
+    public static class GetApprovedByStaffId
+    {
+        public class Query : IRequest<IEnumerable<ThesisAssignmentDto>>
+        {
+            public Query()
+            {
+
+            }
+
+
+        }
+
+        public class Handler : IRequestHandler<Query, IEnumerable<ThesisAssignmentDto>>
+        {
+            private readonly ThesisAssignmentProcessor _thesisAssignmentProcessor;
+
+            public Handler(ThesisAssignmentProcessor thesisAssignmentProcessor)
+            {
+                _thesisAssignmentProcessor = thesisAssignmentProcessor;
+            }
+
+            public async Task<IEnumerable<ThesisAssignmentDto>> Handle(Query request, CancellationToken cancellationToken)
+            {
+                var result = await _thesisAssignmentProcessor.GetApprovedByStaffId();
+                return result;
+            }
+        }
+    }
+
+
 }
