@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using QIMSchoolPro.Thesis.Application.Features.MyGrade.Commands;
 using QIMSchoolPro.Thesis.Application.Features.MyStaff.Queries;
 using QIMSchoolPro.Thesis.Application.Features.MySubmission.Commands;
 using QIMSchoolPro.Thesis.Application.Features.MySubmission.Queries;
@@ -23,6 +24,13 @@ namespace QIMSchoolProThesisService.Controllers
             return await Mediator.Send(new GetGradeParams.Query());
         }
 
-       
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesDefaultResponseType]
+        public async Task<IActionResult> SaveGrade(SaveGrade.SaveGradeCommand command)
+        {
+            await Mediator.Send(command);
+            return NoContent();
+        }
     }
 }

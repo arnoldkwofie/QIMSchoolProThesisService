@@ -1,4 +1,6 @@
 ﻿using Qface.Domain.Shared.Common;
+using QIMSchoolPro.Thesis.Domain.Enums;
+using QIMSchoolPro.Thesis.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +18,26 @@ namespace QIMSchoolPro.Thesis.Domain.Entities
 
         public GradeParam GradeParam { get; set; }
         public decimal Marks { get; set; }
+        public string Comment { get; set; }
 
+        public Grade()
+        {
+        }
+
+        public Grade(int thesisAssignmentId, int gradeParamId, decimal marks, string comment)
+        {
+            ThesisAssignmentId = thesisAssignmentId;
+            GradeParamId = gradeParamId;
+            Marks = marks;
+            Comment = comment;
+           
+        }
+
+        public static Grade Create(int thesisAssignmentId, int gradeParamId, decimal marks, string comment)
+        {
+            return new Grade(
+                thesisAssignmentId, gradeParamId, marks, comment
+            );
+        }
     }
 }

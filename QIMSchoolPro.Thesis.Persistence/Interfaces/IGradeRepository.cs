@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace QIMSchoolPro.Thesis.Persistence.Interfaces
 {
-    public interface IGradeRepository : IRepository<Grade>
+    public interface IGradeParamRepository : IRepository<GradeParam>
     {
     }
 }
