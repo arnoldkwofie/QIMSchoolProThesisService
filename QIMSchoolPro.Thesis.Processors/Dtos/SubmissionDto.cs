@@ -18,12 +18,14 @@ namespace QIMSchoolPro.Thesis.Domain.Entities
         public string Title { get; set; }
         public string Abstract { get; set; }
         public TransitionState TransitionState { get; set; }
+        public int Trip { get; set; }
         public DateTime SubmissionDate { get; set; }
         public AcademicPeriod AcademicPeriod { get; set; }
         //public AuditDto Audit { get; set; }
         public List<DocumentDto> Documents { get; set; }
 
         public List<SubmissionHistoryDto> SubmissionHistories { get; set; }
+        public List<ThesisAssignmentDtoAnnex> ThesisAssignments { get; set; }
 
     }
 }

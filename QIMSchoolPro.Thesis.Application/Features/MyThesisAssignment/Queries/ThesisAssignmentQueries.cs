@@ -70,4 +70,32 @@ namespace QIMSchoolPro.Thesis.Application.Features.MySubmission.Queries
     }
 
 
+    public static class GetExaminerProcessedReviews
+    {
+        public class Query : IRequest<IEnumerable<ThesisAssignmentDto>>
+        {
+            public Query()
+            {
+
+            }
+        }
+
+        public class Handler : IRequestHandler<Query, IEnumerable<ThesisAssignmentDto>>
+        {
+            private readonly ThesisAssignmentProcessor _thesisAssignmentProcessor;
+
+            public Handler(ThesisAssignmentProcessor thesisAssignmentProcessor)
+            {
+                _thesisAssignmentProcessor = thesisAssignmentProcessor;
+            }
+
+            public async Task<IEnumerable<ThesisAssignmentDto>> Handle(Query request, CancellationToken cancellationToken)
+            {
+                var result = await _thesisAssignmentProcessor.GetExaminerProcessedReviews();
+                return result;
+            }
+        }
+    }
+
+
 }

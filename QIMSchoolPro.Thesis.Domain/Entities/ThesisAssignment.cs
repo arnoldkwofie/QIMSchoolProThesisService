@@ -22,6 +22,7 @@ namespace QIMSchoolPro.Thesis.Domain.Entities
         public ReviewerType ReviewerType { get; set; }
         public int Trip { get; set; }
         public DateTime Deadline { get; set; }
+        public bool Assessment { get; set; }
 
         public ThesisAssignment() 
         {
@@ -47,8 +48,12 @@ namespace QIMSchoolPro.Thesis.Domain.Entities
         public ThesisAssignment Decide(ReviewDecision decision)
         {
             Decision = decision;
-           
+            return this;
+        }
 
+        public ThesisAssignment Assess()
+        {
+            Assessment = true;
             return this;
         }
     }

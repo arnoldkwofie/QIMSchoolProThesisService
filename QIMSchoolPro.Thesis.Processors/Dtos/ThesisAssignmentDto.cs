@@ -17,9 +17,23 @@ namespace QIMSchoolPro.Thesis.Domain.Entities
         public SubmissionDto Submission { get; set; }
         public int StaffId { get; set; }
         public StaffDto Staff { get; set; }
-        public bool Accepted { get; set; }
-
+        public ReviewDecision Decision { get; set; }
+        public ReviewerType ReviewerType { get; set; }
         public DateTime Deadline { get; set; }
+        public bool Assessment { get; set; }
+
+    }
+
+    public class ThesisAssignmentDtoAnnex
+    {
+        public int Id { get; set; }
+        public int SubmissionId { get; set; }
+        public int StaffId { get; set; }
+        public StaffDto Staff { get; set; }
+        public ReviewDecision Decision { get; set; }
+        public ReviewerType ReviewerType { get; set; }
+        public DateTime Deadline { get; set; }
+        public bool Assessment { get; set; }
 
     }
 }

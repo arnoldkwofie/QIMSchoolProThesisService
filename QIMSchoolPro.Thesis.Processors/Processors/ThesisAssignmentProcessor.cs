@@ -16,6 +16,7 @@ using Version = QIMSchoolPro.Thesis.Domain.Entities.Version;
 using Qface.Application.Shared.Common.Interfaces;
 using System.Collections;
 using QIMSchoolPro.Thesis.Processors.Constants;
+using Microsoft.AspNetCore.Mvc;
 
 namespace QIMSchoolPro.Thesis.Processors.Processors
 {
@@ -82,6 +83,27 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
         }
 
 
+        public async Task<List<ThesisAssignmentDto>> GetExaminerProcessedReviews()
+        {
+            try
+            {
+                var email = _identityService.GetEmail();
+                var staff = await _staffRepository.GetStaffByEmail(email);
+
+
+                var data = await _thesisAssignmentRepository.GetByStaffId(staff.Id);
+                var result=_mapper.Map<List<ThesisAssignmentDto>>(data);
+                return result.Where(a => a.Assessment).ToList();
+                
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+        }
+
+
         public async Task<List<ThesisAssignmentDto>> GetApprovedByStaffId()
         {
             try
@@ -91,7 +113,7 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
 
 
                 var data = await _thesisAssignmentRepository.GetByStaffId(staff.Id);
-                var result = data.Where(a => a.Decision == ReviewDecision.Approve);
+                var result = data.Where(a => a.Decision == ReviewDecision.Approve && !a.Assessment);
                 return _mapper.Map<List<ThesisAssignmentDto>>(result);
             }
             catch (Exception ex)

@@ -34,6 +34,31 @@ namespace QIMSchoolPro.Thesis.Persistence.Repositories
             return data;
         }
 
+        public async Task<List<Submission>> GetDepartmentProcessedReviews(int departmentId)
+        {
+            var data = await GetBaseQuery().Where(a => a.Student.Programme.Department.Id == departmentId && (a.TransitionState != TransitionState.Department_Review && a.TransitionState != TransitionState.Created)).ToListAsync();
+
+            return data;
+        }
+
+      
+        public async Task<List<Submission>> GetSPSProcessedReviews()
+        {
+            var data = await GetBaseQuery().Where(a=>a.TransitionState != TransitionState.SPS_Review && a.TransitionState != TransitionState.Department_Review && a.TransitionState !=TransitionState.Created).ToListAsync();
+
+            return data;
+        }
+
+        public async Task<List<Submission>> GetReportSubmissions()
+        {
+            var data = await GetBaseQuery()
+             .Where(a => a.ThesisAssignments.Count(x => x.Assessment) == a.ThesisAssignments.Count() && a.ThesisAssignments.Count() !=0)
+             .ToListAsync();
+
+
+            return data;
+        }
+
         public async Task<List<Submission>> GetSPSSubmissions()
         {
             var data = await GetBaseQuery().Where(a=> a.TransitionState == TransitionState.SPS_Review).ToListAsync();
@@ -50,6 +75,7 @@ namespace QIMSchoolPro.Thesis.Persistence.Repositories
             var data = base.GetBaseQuery()
                 .Include(a => a.Documents).ThenInclude(a => a.Versions)
                 .Include(a => a.SubmissionHistories.OrderByDescending(sh => sh.Id)) // Ordering SubmissionHistories
+                .Include(a => a.ThesisAssignments).ThenInclude(a=>a.Staff).ThenInclude(a=>a.Party) // Ordering SubmissionHistories
                 .Include(a => a.Student).ThenInclude(a => a.Programme).ThenInclude(a => a.Department)
                 .Include(a => a.Student).ThenInclude(a => a.Programme).ThenInclude(a=>a.Certificate)
                 .Include(a => a.Student).ThenInclude(a => a.Party);

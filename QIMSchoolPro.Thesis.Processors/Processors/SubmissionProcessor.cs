@@ -195,6 +195,63 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
 
         }
 
+
+        public async Task<List<SubmissionDto>> GetDepartmentProcessedReviews()
+        {
+            try
+            {
+                var username = _identityService.GetUserName();
+                //var email = "department@localhost.com";
+
+                var staff = await _staffRepository.GetStaffByEmail(username);
+
+                var submissions = await _submissionRepository.GetDepartmentProcessedReviews(staff.DepartmentId);
+
+                var dd = _mapper.Map<List<SubmissionDto>>(submissions);
+                return dd;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+        }
+
+
+        public async Task<List<SubmissionDto>> GetSPSProcessedReviews()
+        {
+            try
+            {
+                var submissions = await _submissionRepository.GetSPSProcessedReviews();
+                var data = _mapper.Map<List<SubmissionDto>>(submissions);
+
+                return data;
+          
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+        }
+
+        public async Task<List<SubmissionDto>> GetReportSubmissions()
+        {
+            try
+            {
+                var submissions = await _submissionRepository.GetReportSubmissions();
+                var data = _mapper.Map<List<SubmissionDto>>(submissions);
+
+                return data;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+        }
+
         public async Task<SubmissionDto> Get(int id)
         {
             try
@@ -261,6 +318,18 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
         public string Abstract { get; set; }
 
     }
+
+    //public class SPSProcessedViewModel
+    //{
+    //    public int SubmissionId { get; set; }
+    //    public string StudentNumber { get; set; }
+    //    public string StudentName { get; set; }
+    //    public string Examiner { get; set; }
+    //    public int TotalAssignment { get; set; }
+    //    public int AcceptedAssignment { get; set; }
+    //    public int RejectedAssignment { get; set; }
+    //    public DateTime Deadline { get; set; }
+    //}
 
 
 }

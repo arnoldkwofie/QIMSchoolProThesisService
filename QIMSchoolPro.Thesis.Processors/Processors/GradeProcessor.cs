@@ -19,24 +19,30 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
     {
         private readonly IGradeRepository _gradeRepository;
         private readonly IMapper _mapper;
-
-        public GradeProcessor(IGradeRepository gradeRepository, IMapper mapper)
+        private readonly IThesisAssignmentRepository _thesisAssignment;
+        public GradeProcessor(IGradeRepository gradeRepository, IMapper mapper, IThesisAssignmentRepository thesisAssignment)
         {
             _gradeRepository = gradeRepository;
             _mapper = mapper;
+            _thesisAssignment = thesisAssignment;
 
         }
 
         public async Task SaveGrade(List<GradeCommand> command)
         {
             var data = new List<Grade>();
+
             foreach (var commandItem in command)
             {
                 var grade = Grade.Create(commandItem.AssignmentId, commandItem.GradeParamId, commandItem.Marks, commandItem.Comment);
                 data.Add(grade);
             }
-
             await _gradeRepository.InsertAsync(data);
+
+            var id = command.FirstOrDefault().AssignmentId;
+            var assignment = await _thesisAssignment.GetAsync(id);
+            var assessment = assignment.Assess();
+            await _thesisAssignment.UpdateAsync(assessment);
         }
 
     }

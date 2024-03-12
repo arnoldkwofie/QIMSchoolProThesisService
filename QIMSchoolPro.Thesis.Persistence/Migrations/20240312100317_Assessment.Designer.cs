@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using QIMSchoolPro.Thesis.Persistence;
@@ -11,9 +12,11 @@ using QIMSchoolPro.Thesis.Persistence;
 namespace QIMSchoolPro.Thesis.Persistence.Migrations
 {
     [DbContext(typeof(ThesisDbContext))]
-    partial class ThesisDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240312100317_Assessment")]
+    partial class Assessment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -396,9 +399,6 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
                     b.Property<string>("OtherProperty1")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<bool>("Publish")
-                        .HasColumnType("boolean");
 
                     b.Property<string>("StudentNumber")
                         .IsRequired()
@@ -1384,7 +1384,7 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
                         .IsRequired();
 
                     b.HasOne("QIMSchoolPro.Thesis.Domain.Entities.Submission", "Submission")
-                        .WithMany("ThesisAssignments")
+                        .WithMany()
                         .HasForeignKey("SubmissionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1507,8 +1507,6 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
                     b.Navigation("Documents");
 
                     b.Navigation("SubmissionHistories");
-
-                    b.Navigation("ThesisAssignments");
                 });
 #pragma warning restore 612, 618
         }

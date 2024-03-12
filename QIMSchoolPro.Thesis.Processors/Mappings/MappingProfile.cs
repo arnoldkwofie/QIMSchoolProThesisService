@@ -20,6 +20,7 @@ namespace QIMSchoolPro.Students.Processors.Mappings
 			CreateMap<Version, VersionDto>().ReverseMap();
 			CreateMap<SubmissionHistory, SubmissionHistoryDto>().ReverseMap();
 			CreateMap<ThesisAssignment, ThesisAssignmentDto>().ReverseMap();
+			CreateMap<ThesisAssignment, ThesisAssignmentDtoAnnex>().ReverseMap();
 			CreateMap<Student, StudentDto>().ReverseMap();
 			CreateMap<Programme, ProgrammeDto>().ReverseMap();
 			CreateMap<Department, DepartmentDto>().ReverseMap();

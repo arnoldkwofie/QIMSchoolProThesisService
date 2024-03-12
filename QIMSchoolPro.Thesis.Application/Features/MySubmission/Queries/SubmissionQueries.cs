@@ -99,6 +99,32 @@ namespace QIMSchoolPro.Thesis.Application.Features.MySubmission.Queries
         }
     }
 
+    public static class GetDepartmentProcessedReviews
+    {
+        public class Query : IRequest<IEnumerable<SubmissionDto>>
+        {
+            public Query()
+            {
+
+            }
+        }
+
+        public class Handler : IRequestHandler<Query, IEnumerable<SubmissionDto>>
+        {
+            private readonly SubmissionProcessor _submissionProcessor;
+
+            public Handler(SubmissionProcessor submissionProcessor)
+            {
+                _submissionProcessor = submissionProcessor;
+            }
+
+            public async Task<IEnumerable<SubmissionDto>> Handle(Query request, CancellationToken cancellationToken)
+            {
+                var result = await _submissionProcessor.GetDepartmentProcessedReviews();
+                return result;
+            }
+        }
+    }
 
     public static class GetSPSSubmissions
     {
@@ -126,6 +152,62 @@ namespace QIMSchoolPro.Thesis.Application.Features.MySubmission.Queries
             }
         }
     }
+
+    public static class GetSPSProcessedReviews
+    {
+        public class Query : IRequest<IEnumerable<SubmissionDto>>
+        {
+            public Query()
+            {
+
+            }
+        }
+
+        public class Handler : IRequestHandler<Query, IEnumerable<SubmissionDto>>
+        {
+            private readonly SubmissionProcessor _submissionProcessor;
+
+            public Handler(SubmissionProcessor submissionProcessor)
+            {
+                _submissionProcessor = submissionProcessor;
+            }
+
+            public async Task<IEnumerable<SubmissionDto>> Handle(Query request, CancellationToken cancellationToken)
+            {
+                var result = await _submissionProcessor.GetSPSProcessedReviews();
+                return result;
+            }
+        }
+    }
+
+    public static class GetReportSubmissions
+    {
+        public class Query : IRequest<IEnumerable<SubmissionDto>>
+        {
+            public Query()
+            {
+
+            }
+        }
+
+        public class Handler : IRequestHandler<Query, IEnumerable<SubmissionDto>>
+        {
+            private readonly SubmissionProcessor _submissionProcessor;
+
+            public Handler(SubmissionProcessor submissionProcessor)
+            {
+                _submissionProcessor = submissionProcessor;
+            }
+
+            public async Task<IEnumerable<SubmissionDto>> Handle(Query request, CancellationToken cancellationToken)
+            {
+                var result = await _submissionProcessor.GetReportSubmissions();
+                return result;
+            }
+        }
+    }
+
+
 
     public static class GetSubmission
     {
