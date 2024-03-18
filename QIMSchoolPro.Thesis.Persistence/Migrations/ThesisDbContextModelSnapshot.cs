@@ -543,7 +543,7 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
 
             modelBuilder.Entity("QIMSchoolPro.Thesis.Domain.Entities.AcademicConfiguration", b =>
                 {
-                    b.OwnsOne("QIMSchoolPro.Thesis.Domain.ValueObjects.AcademicPeriod", "AcademicPeriod", b1 =>
+                    b.OwnsOne("QIMSchoolPro.Thesis.Domain.Entities.AcademicConfiguration.AcademicPeriod#QIMSchoolPro.Thesis.Domain.ValueObjects.AcademicPeriod", "AcademicPeriod", b1 =>
                         {
                             b1.Property<int>("AcademicConfigurationId")
                                 .HasColumnType("integer");
@@ -559,13 +559,13 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
 
                             b1.HasKey("AcademicConfigurationId");
 
-                            b1.ToTable("AcademicConfiguration");
+                            b1.ToTable("AcademicConfiguration", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("AcademicConfigurationId");
                         });
 
-                    b.OwnsOne("Qface.Domain.Shared.ValueObjects.Audit", "Audit", b1 =>
+                    b.OwnsOne("QIMSchoolPro.Thesis.Domain.Entities.AcademicConfiguration.Audit#Qface.Domain.Shared.ValueObjects.Audit", "Audit", b1 =>
                         {
                             b1.Property<int>("AcademicConfigurationId")
                                 .HasColumnType("integer");
@@ -603,13 +603,13 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
 
                             b1.HasKey("AcademicConfigurationId");
 
-                            b1.ToTable("AcademicConfiguration");
+                            b1.ToTable("AcademicConfiguration", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("AcademicConfigurationId");
                         });
 
-                    b.OwnsOne("Qface.Domain.Shared.ValueObjects.AcademicPeriodActivity", "OngoingActivity", b1 =>
+                    b.OwnsOne("QIMSchoolPro.Thesis.Domain.Entities.AcademicConfiguration.OngoingActivity#Qface.Domain.Shared.ValueObjects.AcademicPeriodActivity", "OngoingActivity", b1 =>
                         {
                             b1.Property<int>("AcademicConfigurationId")
                                 .HasColumnType("integer");
@@ -625,7 +625,7 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
 
                             b1.HasKey("AcademicConfigurationId");
 
-                            b1.ToTable("AcademicConfiguration");
+                            b1.ToTable("AcademicConfiguration", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("AcademicConfigurationId");
@@ -643,7 +643,7 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
 
             modelBuilder.Entity("QIMSchoolPro.Thesis.Domain.Entities.Certificate", b =>
                 {
-                    b.OwnsOne("Qface.Domain.Shared.ValueObjects.Audit", "Audit", b1 =>
+                    b.OwnsOne("QIMSchoolPro.Thesis.Domain.Entities.Certificate.Audit#Qface.Domain.Shared.ValueObjects.Audit", "Audit", b1 =>
                         {
                             b1.Property<int>("CertificateId")
                                 .HasColumnType("integer");
@@ -681,7 +681,7 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
 
                             b1.HasKey("CertificateId");
 
-                            b1.ToTable("Certificate");
+                            b1.ToTable("Certificate", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("CertificateId");
@@ -693,7 +693,7 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
 
             modelBuilder.Entity("QIMSchoolPro.Thesis.Domain.Entities.Department", b =>
                 {
-                    b.OwnsOne("Qface.Domain.Shared.ValueObjects.Audit", "Audit", b1 =>
+                    b.OwnsOne("QIMSchoolPro.Thesis.Domain.Entities.Department.Audit#Qface.Domain.Shared.ValueObjects.Audit", "Audit", b1 =>
                         {
                             b1.Property<int>("DepartmentId")
                                 .HasColumnType("integer");
@@ -731,7 +731,7 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
 
                             b1.HasKey("DepartmentId");
 
-                            b1.ToTable("Department");
+                            b1.ToTable("Department", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("DepartmentId");
@@ -749,7 +749,7 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("Qface.Domain.Shared.ValueObjects.Audit", "Audit", b1 =>
+                    b.OwnsOne("QIMSchoolPro.Thesis.Domain.Entities.Document.Audit#Qface.Domain.Shared.ValueObjects.Audit", "Audit", b1 =>
                         {
                             b1.Property<int>("DocumentId")
                                 .HasColumnType("integer");
@@ -787,7 +787,7 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
 
                             b1.HasKey("DocumentId");
 
-                            b1.ToTable("Document");
+                            b1.ToTable("Document", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("DocumentId");
@@ -811,7 +811,7 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("Qface.Domain.Shared.ValueObjects.Audit", "Audit", b1 =>
+                    b.OwnsOne("QIMSchoolPro.Thesis.Domain.Entities.Grade.Audit#Qface.Domain.Shared.ValueObjects.Audit", "Audit", b1 =>
                         {
                             b1.Property<int>("GradeId")
                                 .HasColumnType("integer");
@@ -849,7 +849,7 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
 
                             b1.HasKey("GradeId");
 
-                            b1.ToTable("Grade");
+                            b1.ToTable("Grade", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("GradeId");
@@ -865,7 +865,7 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
 
             modelBuilder.Entity("QIMSchoolPro.Thesis.Domain.Entities.GradeParam", b =>
                 {
-                    b.OwnsOne("Qface.Domain.Shared.ValueObjects.Audit", "Audit", b1 =>
+                    b.OwnsOne("QIMSchoolPro.Thesis.Domain.Entities.GradeParam.Audit#Qface.Domain.Shared.ValueObjects.Audit", "Audit", b1 =>
                         {
                             b1.Property<int>("GradeParamId")
                                 .HasColumnType("integer");
@@ -903,7 +903,7 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
 
                             b1.HasKey("GradeParamId");
 
-                            b1.ToTable("GradeParam");
+                            b1.ToTable("GradeParam", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("GradeParamId");
@@ -915,7 +915,7 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
 
             modelBuilder.Entity("QIMSchoolPro.Thesis.Domain.Entities.Party", b =>
                 {
-                    b.OwnsOne("Qface.Domain.Shared.ValueObjects.Audit", "Audit", b1 =>
+                    b.OwnsOne("QIMSchoolPro.Thesis.Domain.Entities.Party.Audit#Qface.Domain.Shared.ValueObjects.Audit", "Audit", b1 =>
                         {
                             b1.Property<int>("PartyId")
                                 .HasColumnType("integer");
@@ -953,51 +953,13 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
 
                             b1.HasKey("PartyId");
 
-                            b1.ToTable("Party");
+                            b1.ToTable("Party", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("PartyId");
                         });
 
-                    b.OwnsOne("QIMSchoolPro.Thesis.Domain.ValueObjects.EmailAddressValueType", "PrimaryEmailAddress", b1 =>
-                        {
-                            b1.Property<int>("PartyId")
-                                .HasColumnType("integer");
-
-                            b1.HasKey("PartyId");
-
-                            b1.ToTable("Party");
-
-                            b1.WithOwner()
-                                .HasForeignKey("PartyId");
-
-                            b1.OwnsOne("QIMSchoolPro.Thesis.Domain.ValueObjects.Email", "Email", b2 =>
-                                {
-                                    b2.Property<int>("EmailAddressValueTypePartyId")
-                                        .HasColumnType("integer");
-
-                                    b2.Property<string>("EmailType")
-                                        .IsRequired()
-                                        .HasColumnType("text");
-
-                                    b2.Property<string>("Value")
-                                        .IsRequired()
-                                        .HasColumnType("text")
-                                        .HasColumnName("Email");
-
-                                    b2.HasKey("EmailAddressValueTypePartyId");
-
-                                    b2.ToTable("Party");
-
-                                    b2.WithOwner()
-                                        .HasForeignKey("EmailAddressValueTypePartyId");
-                                });
-
-                            b1.Navigation("Email")
-                                .IsRequired();
-                        });
-
-                    b.OwnsOne("QIMSchoolPro.Thesis.Domain.ValueObjects.Name", "Name", b1 =>
+                    b.OwnsOne("QIMSchoolPro.Thesis.Domain.Entities.Party.Name#QIMSchoolPro.Thesis.Domain.ValueObjects.Name", "Name", b1 =>
                         {
                             b1.Property<int>("PartyId")
                                 .HasColumnType("integer");
@@ -1016,10 +978,48 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
 
                             b1.HasKey("PartyId");
 
-                            b1.ToTable("Party");
+                            b1.ToTable("Party", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("PartyId");
+                        });
+
+                    b.OwnsOne("QIMSchoolPro.Thesis.Domain.Entities.Party.PrimaryEmailAddress#QIMSchoolPro.Thesis.Domain.ValueObjects.EmailAddressValueType", "PrimaryEmailAddress", b1 =>
+                        {
+                            b1.Property<int>("PartyId")
+                                .HasColumnType("integer");
+
+                            b1.HasKey("PartyId");
+
+                            b1.ToTable("Party", (string)null);
+
+                            b1.WithOwner()
+                                .HasForeignKey("PartyId");
+
+                            b1.OwnsOne("QIMSchoolPro.Thesis.Domain.Entities.Party.PrimaryEmailAddress#QIMSchoolPro.Thesis.Domain.ValueObjects.EmailAddressValueType.Email#QIMSchoolPro.Thesis.Domain.ValueObjects.Email", "Email", b2 =>
+                                {
+                                    b2.Property<int>("EmailAddressValueTypePartyId")
+                                        .HasColumnType("integer");
+
+                                    b2.Property<string>("EmailType")
+                                        .IsRequired()
+                                        .HasColumnType("text");
+
+                                    b2.Property<string>("Value")
+                                        .IsRequired()
+                                        .HasColumnType("text")
+                                        .HasColumnName("Email");
+
+                                    b2.HasKey("EmailAddressValueTypePartyId");
+
+                                    b2.ToTable("Party", (string)null);
+
+                                    b2.WithOwner()
+                                        .HasForeignKey("EmailAddressValueTypePartyId");
+                                });
+
+                            b1.Navigation("Email")
+                                .IsRequired();
                         });
 
                     b.Navigation("Audit")
@@ -1046,7 +1046,7 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("Qface.Domain.Shared.ValueObjects.Audit", "Audit", b1 =>
+                    b.OwnsOne("QIMSchoolPro.Thesis.Domain.Entities.Programme.Audit#Qface.Domain.Shared.ValueObjects.Audit", "Audit", b1 =>
                         {
                             b1.Property<int>("ProgrammeId")
                                 .HasColumnType("integer");
@@ -1084,7 +1084,7 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
 
                             b1.HasKey("ProgrammeId");
 
-                            b1.ToTable("Programme");
+                            b1.ToTable("Programme", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("ProgrammeId");
@@ -1106,7 +1106,7 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("Qface.Domain.Shared.ValueObjects.Audit", "Audit", b1 =>
+                    b.OwnsOne("QIMSchoolPro.Thesis.Domain.Entities.Staff.Audit#Qface.Domain.Shared.ValueObjects.Audit", "Audit", b1 =>
                         {
                             b1.Property<int>("StaffId")
                                 .HasColumnType("integer");
@@ -1144,7 +1144,7 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
 
                             b1.HasKey("StaffId");
 
-                            b1.ToTable("Staff");
+                            b1.ToTable("Staff", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("StaffId");
@@ -1170,26 +1170,7 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("QIMSchoolPro.Students.Domain.ValueObjects.YearGroup", "YearGroup", b1 =>
-                        {
-                            b1.Property<string>("StudentNumber")
-                                .HasColumnType("text");
-
-                            b1.Property<int>("AdmittedYear")
-                                .HasColumnType("integer");
-
-                            b1.Property<int>("ClassYear")
-                                .HasColumnType("integer");
-
-                            b1.HasKey("StudentNumber");
-
-                            b1.ToTable("Student");
-
-                            b1.WithOwner()
-                                .HasForeignKey("StudentNumber");
-                        });
-
-                    b.OwnsOne("Qface.Domain.Shared.ValueObjects.Audit", "Audit", b1 =>
+                    b.OwnsOne("QIMSchoolPro.Thesis.Domain.Entities.Student.Audit#Qface.Domain.Shared.ValueObjects.Audit", "Audit", b1 =>
                         {
                             b1.Property<string>("StudentNumber")
                                 .HasColumnType("text");
@@ -1227,7 +1208,26 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
 
                             b1.HasKey("StudentNumber");
 
-                            b1.ToTable("Student");
+                            b1.ToTable("Student", (string)null);
+
+                            b1.WithOwner()
+                                .HasForeignKey("StudentNumber");
+                        });
+
+                    b.OwnsOne("QIMSchoolPro.Thesis.Domain.Entities.Student.YearGroup#QIMSchoolPro.Students.Domain.ValueObjects.YearGroup", "YearGroup", b1 =>
+                        {
+                            b1.Property<string>("StudentNumber")
+                                .HasColumnType("text");
+
+                            b1.Property<int>("AdmittedYear")
+                                .HasColumnType("integer");
+
+                            b1.Property<int>("ClassYear")
+                                .HasColumnType("integer");
+
+                            b1.HasKey("StudentNumber");
+
+                            b1.ToTable("Student", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("StudentNumber");
@@ -1246,7 +1246,7 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
 
             modelBuilder.Entity("QIMSchoolPro.Thesis.Domain.Entities.Submission", b =>
                 {
-                    b.OwnsOne("QIMSchoolPro.Thesis.Domain.ValueObjects.AcademicPeriod", "AcademicPeriod", b1 =>
+                    b.OwnsOne("QIMSchoolPro.Thesis.Domain.Entities.Submission.AcademicPeriod#QIMSchoolPro.Thesis.Domain.ValueObjects.AcademicPeriod", "AcademicPeriod", b1 =>
                         {
                             b1.Property<int>("SubmissionId")
                                 .HasColumnType("integer");
@@ -1262,13 +1262,13 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
 
                             b1.HasKey("SubmissionId");
 
-                            b1.ToTable("Submission");
+                            b1.ToTable("Submission", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("SubmissionId");
                         });
 
-                    b.OwnsOne("Qface.Domain.Shared.ValueObjects.Audit", "Audit", b1 =>
+                    b.OwnsOne("QIMSchoolPro.Thesis.Domain.Entities.Submission.Audit#Qface.Domain.Shared.ValueObjects.Audit", "Audit", b1 =>
                         {
                             b1.Property<int>("SubmissionId")
                                 .HasColumnType("integer");
@@ -1306,7 +1306,7 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
 
                             b1.HasKey("SubmissionId");
 
-                            b1.ToTable("Submission");
+                            b1.ToTable("Submission", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("SubmissionId");
@@ -1327,7 +1327,7 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("Qface.Domain.Shared.ValueObjects.Audit", "Audit", b1 =>
+                    b.OwnsOne("QIMSchoolPro.Thesis.Domain.Entities.SubmissionHistory.Audit#Qface.Domain.Shared.ValueObjects.Audit", "Audit", b1 =>
                         {
                             b1.Property<int>("SubmissionHistoryId")
                                 .HasColumnType("integer");
@@ -1365,7 +1365,7 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
 
                             b1.HasKey("SubmissionHistoryId");
 
-                            b1.ToTable("SubmissionHistory");
+                            b1.ToTable("SubmissionHistory", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("SubmissionHistoryId");
@@ -1389,7 +1389,7 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("Qface.Domain.Shared.ValueObjects.Audit", "Audit", b1 =>
+                    b.OwnsOne("QIMSchoolPro.Thesis.Domain.Entities.ThesisAssignment.Audit#Qface.Domain.Shared.ValueObjects.Audit", "Audit", b1 =>
                         {
                             b1.Property<int>("ThesisAssignmentId")
                                 .HasColumnType("integer");
@@ -1427,7 +1427,7 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
 
                             b1.HasKey("ThesisAssignmentId");
 
-                            b1.ToTable("ThesisAssignment");
+                            b1.ToTable("ThesisAssignment", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("ThesisAssignmentId");
@@ -1449,7 +1449,7 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("Qface.Domain.Shared.ValueObjects.Audit", "Audit", b1 =>
+                    b.OwnsOne("QIMSchoolPro.Thesis.Domain.Entities.Version.Audit#Qface.Domain.Shared.ValueObjects.Audit", "Audit", b1 =>
                         {
                             b1.Property<int>("VersionId")
                                 .HasColumnType("integer");
@@ -1487,7 +1487,7 @@ namespace QIMSchoolPro.Thesis.Persistence.Migrations
 
                             b1.HasKey("VersionId");
 
-                            b1.ToTable("Version");
+                            b1.ToTable("Version", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("VersionId");
