@@ -24,6 +24,18 @@ namespace QIMSchoolPro.Thesis.Persistence.Repositories
                Where(a => a.StaffId == staffId).ToList();
         }
 
+        public async Task<List<ThesisAssignment>> GetReviewerReportSubmissions(int staffId)
+        {
+            var data = await GetBaseQuery().Where(a => a.StaffId == staffId && a.Submission.Publish).ToListAsync();
+            return data;
+        }
+
+        public async Task<List<ThesisAssignment>> GetBySubmissionId(int submissionId)
+        {
+            return GetBaseQuery().
+               Where(a => a.SubmissionId == submissionId).ToList();
+        }
+
         public override IQueryable<ThesisAssignment> GetBaseQuery()
         {
             return base.GetBaseQuery()
@@ -31,7 +43,10 @@ namespace QIMSchoolPro.Thesis.Persistence.Repositories
                   .Include(a => a.Submission).ThenInclude(a => a.Student).ThenInclude(a => a.Programme).ThenInclude(a => a.Department)
                   .Include(a => a.Submission).ThenInclude(a => a.Student).ThenInclude(a => a.Programme).ThenInclude(a => a.Certificate)
                   .Include(a => a.Submission).ThenInclude(a => a.Student).ThenInclude(a => a.Party)
-                  .Include(a => a.Submission).ThenInclude(a => a.Documents).ThenInclude(a => a.Versions);
+                  .Include(a => a.Staff).ThenInclude(a => a.Party)
+                  .Include(a => a.Submission).ThenInclude(a => a.Documents).ThenInclude(a => a.Versions)
+                  .Include(a=>a.Grades).ThenInclude(a=>a.GradeParam)
+                  .Include(a=>a.ExaminerReports);
                 
 
             

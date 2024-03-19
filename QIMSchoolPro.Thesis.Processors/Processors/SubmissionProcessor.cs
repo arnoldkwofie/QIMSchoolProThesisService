@@ -178,6 +178,39 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
 
         }
 
+
+        public async Task SubmissionDecision(int submissionId, int decision)
+        {
+            try
+            {
+                var submission = await _submissionRepository.GetAsync(submissionId);
+                var updateSubmission = submission.Decide((DecisionState)decision);
+
+                await _submissionRepository.UpdateAsync(updateSubmission);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+        }
+
+        public async Task Publish(int id)
+        {
+            try
+            {
+                var submission = await _submissionRepository.GetAsync(id);
+                var updateSubmission = submission.PublishIt(true);
+
+                await _submissionRepository.UpdateAsync(updateSubmission);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+        }
+
         public async Task<List<SubmissionDto>> GetSPSSubmissions()
         {
             try
@@ -240,6 +273,44 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
             try
             {
                 var submissions = await _submissionRepository.GetReportSubmissions();
+                var data = _mapper.Map<List<SubmissionDto>>(submissions);
+
+                return data;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+        }
+
+        public async Task<List<SubmissionDto>> GetStudentReportSubmissions()
+        {
+            try
+            {
+                var username  = _identityService.GetUserName();
+                var submissions = await _submissionRepository.GetStudentReportSubmissions(username);
+                var data = _mapper.Map<List<SubmissionDto>>(submissions);
+
+                return data;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+        }
+
+        public async Task<List<SubmissionDto>> GetDepartmentReportSubmissions()
+        {
+            try
+            {
+                var username = _identityService.GetUserName();
+                var staff = await _staffRepository.GetStaffByEmail(username);
+
+                var submissions = await _submissionRepository.GetDepartmentReportSubmissions(staff.DepartmentId);
                 var data = _mapper.Map<List<SubmissionDto>>(submissions);
 
                 return data;

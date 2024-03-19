@@ -59,6 +59,30 @@ namespace QIMSchoolPro.Thesis.Persistence.Repositories
             return data;
         }
 
+        public async Task<List<Submission>> GetStudentReportSubmissions(string username)
+        {
+            var data = await GetBaseQuery()
+             .Where(a => a.ThesisAssignments.Count(x => x.Assessment) == a.ThesisAssignments.Count() &&
+             a.ThesisAssignments.Count() != 0 && a.Publish && a.StudentNumber==username)
+             .ToListAsync();
+
+
+            return data;
+        }
+
+        public async Task<List<Submission>> GetDepartmentReportSubmissions(int departmentId)
+        {
+            var data = await GetBaseQuery()
+             .Where(a => a.ThesisAssignments.Count(x => x.Assessment) == a.ThesisAssignments.Count() &&
+             a.ThesisAssignments.Count() != 0 && a.Publish && a.Student.Programme.Department.Id == departmentId)
+             .ToListAsync();
+
+
+            return data;
+        }
+
+
+     
         public async Task<List<Submission>> GetSPSSubmissions()
         {
             var data = await GetBaseQuery().Where(a=> a.TransitionState == TransitionState.SPS_Review).ToListAsync();

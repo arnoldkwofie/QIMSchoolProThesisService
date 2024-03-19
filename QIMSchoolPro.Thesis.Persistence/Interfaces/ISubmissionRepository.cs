@@ -17,5 +17,7 @@ namespace QIMSchoolPro.Thesis.Persistence.Interfaces
         Task<List<Submission>> GetDepartmentProcessedReviews(int departmentId);
         Task<List<Submission>> GetSPSProcessedReviews();
         Task<List<Submission>> GetReportSubmissions();
+        Task<List<Submission>> GetStudentReportSubmissions(string username);
+        Task<List<Submission>> GetDepartmentReportSubmissions(int departmentId);
     }
 }

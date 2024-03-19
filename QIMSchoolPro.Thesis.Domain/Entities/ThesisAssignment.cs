@@ -23,6 +23,8 @@ namespace QIMSchoolPro.Thesis.Domain.Entities
         public int Trip { get; set; }
         public DateTime Deadline { get; set; }
         public bool Assessment { get; set; }
+        public List<Grade> Grades { get; set; }
+        public List<ExaminerReport> ExaminerReports { get; set; }
 
         public ThesisAssignment() 
         {

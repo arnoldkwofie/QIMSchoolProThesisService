@@ -9,10 +9,11 @@ using System.Reflection;
 using QIMSchoolPro.Thesis.Persistence;
 using QIMSchoolPro.Thesis.Application;
 using QIMSchoolPro.Thesis.Processors;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+//using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace QIMSchoolProThesisService
 {
@@ -27,7 +28,7 @@ namespace QIMSchoolProThesisService
                 .AddCore(configuration)
                 .AddInfrastructure(configuration)
                 .AddProcessors()
-                .AddHttpClient(); 
+                .AddHttpClient();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
              .AddJwtBearer(options =>

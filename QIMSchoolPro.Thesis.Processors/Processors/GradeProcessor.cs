@@ -4,6 +4,7 @@ using QIMSchoolPro.Thesis.Domain.Entities;
 using QIMSchoolPro.Thesis.Domain.Enums;
 using QIMSchoolPro.Thesis.Domain.ValueObjects;
 using QIMSchoolPro.Thesis.Persistence.Interfaces;
+using QIMSchoolPro.Thesis.Persistence.Repositories;
 using System;
 using System.CodeDom;
 using System.Collections.Generic;
@@ -20,13 +21,29 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
         private readonly IGradeRepository _gradeRepository;
         private readonly IMapper _mapper;
         private readonly IThesisAssignmentRepository _thesisAssignment;
-        public GradeProcessor(IGradeRepository gradeRepository, IMapper mapper, IThesisAssignmentRepository thesisAssignment)
+        private readonly IExaminerReportRepository _examinerReportRepository;
+        public GradeProcessor(IGradeRepository gradeRepository, IMapper mapper, IThesisAssignmentRepository thesisAssignment, IExaminerReportRepository examinerReportRepository)
         {
             _gradeRepository = gradeRepository;
             _mapper = mapper;
             _thesisAssignment = thesisAssignment;
+            _examinerReportRepository = examinerReportRepository;
 
         }
+
+        public async Task UploadReport(UploadCommand command)
+        {
+            try
+            {
+                    var report = ExaminerReport.Create(command.ThesisAssignmentId, command.Path);
+                    await _examinerReportRepository.InsertAsync(report);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
 
         public async Task SaveGrade(List<GradeCommand> command)
         {
@@ -53,6 +70,12 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
         public int GradeParamId { get; set; }
         public decimal Marks { get; set; }
         public string Comment { get; set; }
+    }
+
+    public class UploadCommand
+    {
+        public int ThesisAssignmentId { get; set; }
+        public string Path { get; set; }
     }
 
 

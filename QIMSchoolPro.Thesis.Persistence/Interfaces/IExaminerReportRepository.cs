@@ -9,10 +9,8 @@ using Version = QIMSchoolPro.Thesis.Domain.Entities.Version;
 
 namespace QIMSchoolPro.Thesis.Persistence.Interfaces
 {
-    public interface IThesisAssignmentRepository : IRepository<ThesisAssignment>
+    public interface IExaminerReportRepository : IRepository<ExaminerReport>
     {
-        Task<List<ThesisAssignment>> GetByStaffId(int staffId);
-        Task<List<ThesisAssignment>> GetBySubmissionId(int submissionId);
-        Task<List<ThesisAssignment>> GetReviewerReportSubmissions(int staffId);
+       
     }
 }

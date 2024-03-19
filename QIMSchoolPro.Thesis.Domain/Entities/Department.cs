@@ -12,5 +12,7 @@ namespace QIMSchoolPro.Thesis.Domain.Entities
         public int Id { get; private set; }
         public string Name { get; private set; }
 
+
+
     }
 }

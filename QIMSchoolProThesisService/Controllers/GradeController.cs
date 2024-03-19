@@ -32,5 +32,15 @@ namespace QIMSchoolProThesisService.Controllers
             await Mediator.Send(command);
             return NoContent();
         }
+
+
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesDefaultResponseType]
+        public async Task<IActionResult> UploadReport(UploadReport.UploadReportCommand command)
+        {
+            await Mediator.Send(command);
+            return NoContent();
+        }
     }
 }

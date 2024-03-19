@@ -13,4 +13,12 @@ namespace QIMSchoolPro.Thesis.Domain.Enums
         Reject,
         
     }
+
+    public enum DecisionState
+    {
+        Neutral,
+        Approve,
+        Reject,
+
+    }
 }

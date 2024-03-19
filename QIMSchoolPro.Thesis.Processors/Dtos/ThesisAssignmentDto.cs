@@ -1,12 +1,5 @@
-﻿using Qface.Application.Shared.Dtos;
-using Qface.Domain.Shared.Common;
-using QIMSchoolPro.Thesis.Domain.Enums;
-using QIMSchoolPro.Thesis.Domain.ValueObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using QIMSchoolPro.Thesis.Domain.Enums;
+using QIMSchoolPro.Thesis.Processors.Dtos;
 
 namespace QIMSchoolPro.Thesis.Domain.Entities
 {
@@ -21,6 +14,8 @@ namespace QIMSchoolPro.Thesis.Domain.Entities
         public ReviewerType ReviewerType { get; set; }
         public DateTime Deadline { get; set; }
         public bool Assessment { get; set; }
+        public List<GradeDto> Grades { get; set; }
+        public List<ExaminerReportDto> ExaminerReports { get; set; }
 
     }
 

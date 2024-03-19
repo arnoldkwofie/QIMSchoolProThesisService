@@ -36,8 +36,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qface.Application.Shared", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qface.Persistence.EntityFramework.Extensions", "Qface.Persistence.EntityFramework.Extensions\Qface.Persistence.EntityFramework.Extensions.csproj", "{8681270D-5CE3-497B-8E6E-B7CD6EC50BA0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QIMSchoolProThesisService.Identity", "QIMSchoolProThesisService.Identity\QIMSchoolProThesisService.Identity.csproj", "{A0AF57AC-CC83-4AC1-AEEE-CF4A8B7BA822}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -84,10 +82,6 @@ Global
 		{8681270D-5CE3-497B-8E6E-B7CD6EC50BA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8681270D-5CE3-497B-8E6E-B7CD6EC50BA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8681270D-5CE3-497B-8E6E-B7CD6EC50BA0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A0AF57AC-CC83-4AC1-AEEE-CF4A8B7BA822}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A0AF57AC-CC83-4AC1-AEEE-CF4A8B7BA822}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A0AF57AC-CC83-4AC1-AEEE-CF4A8B7BA822}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A0AF57AC-CC83-4AC1-AEEE-CF4A8B7BA822}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -107,7 +101,6 @@ Global
 		{4696D995-C92F-42A9-A844-4EA5D9277BB2} = {8267D520-A02A-4CBA-8621-FFE51B91B6C4}
 		{7679E021-C72F-4C5A-BDAE-4304AD693157} = {8267D520-A02A-4CBA-8621-FFE51B91B6C4}
 		{8681270D-5CE3-497B-8E6E-B7CD6EC50BA0} = {8267D520-A02A-4CBA-8621-FFE51B91B6C4}
-		{A0AF57AC-CC83-4AC1-AEEE-CF4A8B7BA822} = {CA2F6FFF-69B0-49B5-8766-2CD5E4F51F59}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2C994137-5A3E-451F-8A6E-8F83FC3C0B3D}

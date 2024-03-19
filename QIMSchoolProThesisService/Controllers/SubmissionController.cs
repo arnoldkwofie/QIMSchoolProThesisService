@@ -30,8 +30,25 @@ namespace QIMSchoolProThesisService.Controllers
 			return NoContent();
 		}
 
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesDefaultResponseType]
+        public async Task<IActionResult> Decide(SubmissionDecision.DecideCommand command)
+        {
+            await Mediator.Send(command);
+            return NoContent();
+        }
 
-		[HttpGet]
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesDefaultResponseType]
+        public async Task<IActionResult> Publish(Publish.PublishCommand command)
+        {
+            await Mediator.Send(command);
+            return NoContent();
+        }
+
+        [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IEnumerable<SubmissionDto>> GetUserSubmissions()
@@ -79,6 +96,30 @@ namespace QIMSchoolProThesisService.Controllers
         public async Task<IEnumerable<SubmissionDto>> GetReportSubmissions()
         {
             return await Mediator.Send(new GetReportSubmissions.Query());
+        }
+
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IEnumerable<SubmissionDto>> GetStudentReportSubmissions()
+        {
+            return await Mediator.Send(new GetStudentReportSubmissions.Query());
+        }
+
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IEnumerable<SubmissionDto>> GetDepartmentReportSubmissions()
+        {
+            return await Mediator.Send(new GetDepartmentReportSubmissions.Query());
+        }
+
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IEnumerable<ThesisAssignmentDto>> GetReviewerReportSubmissions()
+        {
+            return await Mediator.Send(new GetReviewerReportSubmissions.Query());
         }
 
 

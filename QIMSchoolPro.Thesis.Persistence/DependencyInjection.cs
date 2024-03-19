@@ -53,6 +53,7 @@ namespace QIMSchoolPro.Thesis.Persistence
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             services.AddScoped<IGradeParamRepository, GradeParamRepository>();
             services.AddScoped<IGradeRepository, GradeRepository>();
+            services.AddScoped<IExaminerReportRepository, ExaminerReportRepository>();
             services.AddScoped<IAcademicConfigurationRepository, AcademicConfigurationRepository>();
             services.AddTransient<IIdentityService, IdentityService>();
 

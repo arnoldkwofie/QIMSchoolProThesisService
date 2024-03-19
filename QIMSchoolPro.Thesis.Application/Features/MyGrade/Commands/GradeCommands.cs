@@ -34,4 +34,29 @@ namespace QIMSchoolPro.Thesis.Application.Features.MyGrade.Commands
     }
 
 
+    public static class UploadReport
+    {
+
+        public class UploadReportCommand : IRequest
+        {
+            public UploadCommand Payload { get; set; }
+
+        }
+
+        public class Handler : IRequestHandler<UploadReportCommand>
+        {
+            private readonly GradeProcessor _gradeProcessor;
+
+            public Handler(GradeProcessor gradeProcessor)
+            {
+                _gradeProcessor = gradeProcessor;
+            }
+            public async Task Handle(UploadReportCommand request, CancellationToken cancellationToken)
+            {
+                await _gradeProcessor.UploadReport(request.Payload);
+            }
+        }
+
+    }
+
 }

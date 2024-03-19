@@ -16,7 +16,7 @@ namespace QIMSchoolPro.Thesis.Domain.Entities
         public int Id { get; set; }
         [ForeignKey(nameof(Student))]
         public string StudentNumber { get; set; }
-        [NotMapped]
+        //[NotMapped]
         public Student Student { get; set; }
         public string Title { get; set; }
         public string Abstract { get; set; }
@@ -24,7 +24,7 @@ namespace QIMSchoolPro.Thesis.Domain.Entities
         public DateTime SubmissionDate { get; set; }
         public int Trip { get; set; }
         public bool Publish { get; set; }
-        public ReviewDecision DecisionState { get; set; }
+        public DecisionState DecisionState { get; set; }
         public AcademicPeriod AcademicPeriod { get; set; }
         public List<Document> Documents { get; set; }   
         public List<SubmissionHistory> SubmissionHistories { get; set; }
@@ -63,6 +63,18 @@ namespace QIMSchoolPro.Thesis.Domain.Entities
 			return this;
 		}
 
+        public Submission Decide(DecisionState decisionState)
+        {
+            DecisionState = decisionState;
+
+            return this;
+        }
+        public Submission PublishIt(bool publish)
+        {
+            Publish = publish;
+
+            return this;
+        }
         public Submission Transit(TransitionState transitionState)
         {
             TransitionState = transitionState;

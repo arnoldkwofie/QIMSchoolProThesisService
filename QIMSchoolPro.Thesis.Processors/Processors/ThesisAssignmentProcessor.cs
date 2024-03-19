@@ -120,8 +120,37 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
             {
                 throw new Exception(ex.Message);
             }
+        }
 
-            
+        public async Task<List<ThesisAssignmentDto>> GetBySubmissionId(int id)
+        {
+            try
+            {
+                var data = await _thesisAssignmentRepository.GetBySubmissionId(id);
+                return _mapper.Map<List<ThesisAssignmentDto>>(data);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+        }
+
+        public async Task<List<ThesisAssignmentDto>> GetReviewerReportSubmissions()
+        {
+            try
+            {
+                var email = _identityService.GetEmail();
+                var staff = await _staffRepository.GetStaffByEmail(email);
+                var data = await _thesisAssignmentRepository.GetReviewerReportSubmissions(staff.Id);
+                return _mapper.Map<List<ThesisAssignmentDto>>(data);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+
         }
 
         public async Task Decide(DecisionCommand command)

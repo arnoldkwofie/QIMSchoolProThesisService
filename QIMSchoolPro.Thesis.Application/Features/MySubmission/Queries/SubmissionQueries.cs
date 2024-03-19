@@ -208,6 +208,89 @@ namespace QIMSchoolPro.Thesis.Application.Features.MySubmission.Queries
     }
 
 
+    public static class GetStudentReportSubmissions
+    {
+        public class Query : IRequest<IEnumerable<SubmissionDto>>
+        {
+            public Query()
+            {
+
+            }
+        }
+
+        public class Handler : IRequestHandler<Query, IEnumerable<SubmissionDto>>
+        {
+            private readonly SubmissionProcessor _submissionProcessor;
+
+            public Handler(SubmissionProcessor submissionProcessor)
+            {
+                _submissionProcessor = submissionProcessor;
+            }
+
+            public async Task<IEnumerable<SubmissionDto>> Handle(Query request, CancellationToken cancellationToken)
+            {
+                var result = await _submissionProcessor.GetStudentReportSubmissions();
+                return result;
+            }
+        }
+    }
+
+
+    public static class GetDepartmentReportSubmissions
+    {
+        public class Query : IRequest<IEnumerable<SubmissionDto>>
+        {
+            public Query()
+            {
+
+            }
+        }
+
+        public class Handler : IRequestHandler<Query, IEnumerable<SubmissionDto>>
+        {
+            private readonly SubmissionProcessor _submissionProcessor;
+
+            public Handler(SubmissionProcessor submissionProcessor)
+            {
+                _submissionProcessor = submissionProcessor;
+            }
+
+            public async Task<IEnumerable<SubmissionDto>> Handle(Query request, CancellationToken cancellationToken)
+            {
+                var result = await _submissionProcessor.GetDepartmentReportSubmissions();
+                return result;
+            }
+        }
+    }
+
+
+    public static class GetReviewerReportSubmissions
+    {
+        public class Query : IRequest<IEnumerable<ThesisAssignmentDto>>
+        {
+            public Query()
+            {
+
+            }
+        }
+
+        public class Handler : IRequestHandler<Query, IEnumerable<ThesisAssignmentDto>>
+        {
+            private readonly ThesisAssignmentProcessor _thesisAssignmentProcessor;
+
+            public Handler(ThesisAssignmentProcessor thesisAssignmentProcessor)
+            {
+                _thesisAssignmentProcessor = thesisAssignmentProcessor;
+            }
+
+            public async Task<IEnumerable<ThesisAssignmentDto>> Handle(Query request, CancellationToken cancellationToken)
+            {
+                var result = await _thesisAssignmentProcessor.GetReviewerReportSubmissions();
+                return result;
+            }
+        }
+    }
+
 
     public static class GetSubmission
     {

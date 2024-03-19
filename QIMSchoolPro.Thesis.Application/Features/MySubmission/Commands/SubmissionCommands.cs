@@ -43,8 +43,62 @@ namespace QIMSchoolPro.Thesis.Application.Features.MySubmission.Commands
     }
 
 
+    public static class SubmissionDecision
+    {
 
-	public static class PostSubmission
+        public class DecideCommand : IRequest
+        {
+
+            public int id { get; set; }
+            public int decision { get; set; }
+           
+
+        }
+
+        public class Handler : IRequestHandler<DecideCommand>
+        {
+            private readonly SubmissionProcessor _submissionprocessor;
+
+            public Handler(SubmissionProcessor submissionProcessor)
+            {
+                _submissionprocessor = submissionProcessor;
+
+            }
+            public async Task Handle(DecideCommand request, CancellationToken cancellationToken)
+            {
+                await _submissionprocessor.SubmissionDecision(request.id, request.decision);
+            }
+        }
+    }
+
+
+    public static class Publish
+    {
+
+        public class PublishCommand : IRequest
+        {
+            public int id { get; set; }
+        }
+
+        public class Handler : IRequestHandler<PublishCommand>
+        {
+            private readonly SubmissionProcessor _submissionprocessor;
+
+            public Handler(SubmissionProcessor submissionProcessor)
+            {
+                _submissionprocessor = submissionProcessor;
+
+            }
+            public async Task Handle(PublishCommand request, CancellationToken cancellationToken)
+            {
+                await _submissionprocessor.Publish(request.id);
+            }
+        }
+
+
+    }
+
+    public static class PostSubmission
 	{
 
 		public class PostSubmissionCommand : IRequest

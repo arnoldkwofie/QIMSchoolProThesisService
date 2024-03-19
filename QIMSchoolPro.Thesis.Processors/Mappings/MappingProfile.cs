@@ -6,6 +6,7 @@ using Qface.Application.Shared.Dtos;
 using Qface.Domain.Shared.ValueObjects;
 using QIMSchoolPro.Thesis.Domain.Entities;
 using QIMSchoolPro.Thesis.Persistence.Configurations;
+using QIMSchoolPro.Thesis.Processors.Dtos;
 using Version = QIMSchoolPro.Thesis.Domain.Entities.Version;
 
 namespace QIMSchoolPro.Students.Processors.Mappings
@@ -29,7 +30,7 @@ namespace QIMSchoolPro.Students.Processors.Mappings
 			CreateMap<Certificate, CertificateDto>().ReverseMap();
 			CreateMap<Grade, GradeDto>().ReverseMap();
 			CreateMap<GradeParam, GradeParamDto>().ReverseMap();
-			
+			CreateMap<ExaminerReport, ExaminerReportDto>().ReverseMap();
 			
 		}
 	}

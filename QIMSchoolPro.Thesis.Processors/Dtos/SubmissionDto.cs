@@ -18,6 +18,7 @@ namespace QIMSchoolPro.Thesis.Domain.Entities
         public string Title { get; set; }
         public string Abstract { get; set; }
         public TransitionState TransitionState { get; set; }
+        public DecisionState DecisionState { get; set; }
         public int Trip { get; set; }
         public DateTime SubmissionDate { get; set; }
         public AcademicPeriod AcademicPeriod { get; set; }

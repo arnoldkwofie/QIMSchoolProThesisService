@@ -14,9 +14,8 @@ namespace QIMSchoolPro.Thesis.Domain.Entities
     {
         public int Id { get;  set; }
         public int ThesisAssignmentId { get;  set; }
-        public ThesisAssignmentDto ThesisAssignment { get; set; }
+       // public ThesisAssignmentDto ThesisAssignment { get; set; }
         public int GradeParamId { get; set; }
-
         public GradeParamDto GradeParam { get; set; }
         public decimal Marks { get; set; }
 

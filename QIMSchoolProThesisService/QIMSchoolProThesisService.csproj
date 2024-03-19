@@ -11,6 +11,7 @@
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="Dapper" Version="2.1.28" />
     <PackageReference Include="Here" Version="0.9.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.28" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.10">
       <PrivateAssets>all</PrivateAssets>
@@ -27,7 +28,6 @@
     <ProjectReference Include="..\QIMSchoolPro.Thesis.Application\QIMSchoolPro.Thesis.Application.csproj" />
     <ProjectReference Include="..\QIMSchoolPro.Thesis.Persistence\QIMSchoolPro.Thesis.Persistence.csproj" />
     <ProjectReference Include="..\QIMSchoolPro.Thesis.Processors\QIMSchoolPro.Thesis.Processors.csproj" />
-    <ProjectReference Include="..\QIMSchoolProThesisService.Identity\QIMSchoolProThesisService.Identity.csproj" />
   </ItemGroup>
 
 </Project>

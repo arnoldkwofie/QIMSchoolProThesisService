@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using QIMSchoolPro.Students.Processors.Mappings;
 using QIMSchoolPro.Thesis.Processors;
 using QIMSchoolProThesisService;
-using QIMSchoolProThesisService.Identity;
 using System.Configuration;
 using System.Xml.Linq;
 

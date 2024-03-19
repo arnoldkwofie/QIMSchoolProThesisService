@@ -45,6 +45,14 @@ namespace QIMSchoolProThesisService.Controllers
             return await Mediator.Send(new GetApprovedByStaffId.Query());
         }
 
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IEnumerable<ThesisAssignmentDto>> GetBySubmissionId(int id)
+        {
+            var data= await Mediator.Send(new GetBySubmissionId.Query(id));
+            return data;
+        }
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
