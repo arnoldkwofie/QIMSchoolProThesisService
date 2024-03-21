@@ -27,12 +27,12 @@ namespace QIMSchoolPro.Thesis.Processors.Services
 
                 // set authentication details.
                 request.setAuthModel(AuthModel.API_KEY);
-                request.setAuthApiKey("49244f8ffc3ed558188b699747d07186a675db279f9b42408ead155535b78571");
+                request.setAuthApiKey("ebeed7985ad7756fa9eeb276c490431964b6d85c5f8d7df73863e6d194d5bf66");
 
                 // message properties
                 request.setMessage(message);
                 request.setSMSType(SMSType.GSM_DEFAULT);
-                request.setSender("TEST");      // should be registered
+                request.setSender("UMaT");      // should be registered
 
                 // add message destination
                 request.addDestination(phone);

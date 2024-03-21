@@ -18,6 +18,7 @@ namespace QIMSchoolPro.Thesis.Processors.Constants
         public static string ExaminerReturn = "submission is reviewed and submitted to SPS";
         public static string SPSToDepartment = "submission is sent to Department by SPS";
         public static string DepartmentToStudent = "submission is sent to Student by Department";
+        public static string Publish = "Result has been Published";
 
     }
 }

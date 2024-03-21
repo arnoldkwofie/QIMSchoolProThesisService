@@ -195,7 +195,7 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
 
         }
 
-        public async Task Publish(int id)
+        public async Task Publish(int id, CancellationToken cancellationToken)
         {
             try
             {
@@ -203,6 +203,8 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
                 var updateSubmission = submission.PublishIt(true);
 
                 await _submissionRepository.UpdateAsync(updateSubmission);
+
+                await _submissionHistoryProcessor.SaveSubmissionHistory(submission.Id, submission.Student.PartyId, Activity.Publish, DateTime.UtcNow, cancellationToken);
             }
             catch (Exception ex)
             {
@@ -217,6 +219,23 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
             {
                 
                 var submissions = await _submissionRepository.GetSPSSubmissions();
+
+                var dd = _mapper.Map<List<SubmissionDto>>(submissions);
+                return dd;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+        }
+
+        public async Task<List<SubmissionDto>> GetLibrarySubmissions()
+        {
+            try
+            {
+
+                var submissions = await _submissionRepository.GetLibrarySubmissions();
 
                 var dd = _mapper.Map<List<SubmissionDto>>(submissions);
                 return dd;
@@ -336,6 +355,14 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
                 throw new Exception(ex.Message);
             }
 
+        }
+
+        public async Task SubmitToLibrary(int id)
+        {
+            var submission = await _submissionRepository.GetAsync(id);
+
+            var data = submission.Transit(TransitionState.Library);
+            await _submissionRepository.UpdateAsync(submission);
         }
 
 

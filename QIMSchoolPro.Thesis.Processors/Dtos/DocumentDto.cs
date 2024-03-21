@@ -22,7 +22,5 @@ namespace QIMSchoolPro.Thesis.Domain.Entities
         public List<VersionDto> Versions { get; set; }
 
 
-
-
     }
 }

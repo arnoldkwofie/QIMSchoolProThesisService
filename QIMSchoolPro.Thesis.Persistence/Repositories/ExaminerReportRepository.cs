@@ -4,6 +4,7 @@ using QIMSchoolPro.Thesis.Persistence.Interfaces;
 using QIMSchoolPro.Thesis.Persistence.Repositories.Base;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Security.Principal;
 using System.Text;

@@ -11,7 +11,8 @@ namespace QIMSchoolPro.Thesis.Domain.Enums
         Created=1,
         Department_Review,
         SPS_Review,
-        Examiner_Review
+        Examiner_Review,
+        Library
 
     }
 }

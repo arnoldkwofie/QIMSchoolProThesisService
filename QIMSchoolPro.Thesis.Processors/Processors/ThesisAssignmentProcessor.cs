@@ -17,6 +17,7 @@ using Qface.Application.Shared.Common.Interfaces;
 using System.Collections;
 using QIMSchoolPro.Thesis.Processors.Constants;
 using Microsoft.AspNetCore.Mvc;
+using QIMSchoolPro.Thesis.Processors.Services;
 
 namespace QIMSchoolPro.Thesis.Processors.Processors
 {
@@ -47,9 +48,8 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
             {
                 var email = _identityService.GetEmail();
                 var staff = await _staffRepository.GetStaffByEmail(email);
-
-                
-
+              
+               
                 if (command != null)
                 {
                     var submission = await _submissionRepository.GetAsync(command.SubmissionId);
@@ -61,6 +61,28 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
                     await _submissionRepository.UpdateAsync(review);
 
                     await _submissionHistoryProcessor.SaveSubmissionHistory(submission.Id, staff.PartyId, Activity.ExaminerReview, DateTime.UtcNow, cancellationToken);
+
+
+
+                    AssignmmentEmailMessageModel emailMessage = new AssignmmentEmailMessageModel();
+                    emailMessage.SubmissionNo = submission.Id;
+                    emailMessage.StudentNumber= submission.StudentNumber;
+                    emailMessage.StudentName=submission.Student.Party.Name.FirstName + " "+ submission.Student.Party.Name.LastName;
+                    emailMessage.ExaminerName = thesisAssignment?.Staff?.Party?.Name?.FirstName + " " + thesisAssignment?.Staff?.Party?.Name?.LastName;
+                    emailMessage.Programme = submission.Student.Programme.Name;
+                    emailMessage.Department = submission.Student.Programme.Department.Name;
+                    emailMessage.ReviewerType=thesisAssignment.ReviewerType;
+                    emailMessage.Title=submission.Title;
+                    emailMessage.Degree = submission.Student.Programme.Certificate.Code;
+
+
+                    var message =HtmlMessage.AssignmmentEmailMessage(emailMessage);
+                //EmailService.SendEmail( staff.Party.Name.FirstName + staff.Party.Name.LastName, "arnoldschwazzy@gmail.com", "UMaT - School of Postgraduate Studies", message);
+                EmailService.SendEmail( staff.Party.Name.FirstName + staff.Party.Name.LastName, staff.Party.PrimaryEmailAddress.Email.Value, "UMaT - School of Postgraduate Studies", message);
+                    
+                    var sms= HtmlMessage.AssignmmentSMSMessage(emailMessage);
+                    //TestMessage.Send(sms, "0245181940");
+
 
                 }
             }

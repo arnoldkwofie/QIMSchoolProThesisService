@@ -72,6 +72,40 @@ namespace QIMSchoolPro.Thesis.Application.Features.MySubmission.Queries
 
     }
 
+
+    public static class SubmitToLibrary 
+    {
+
+        public class Query : IRequest
+        {
+            public int SubmissionId { get; set; }
+            
+            public Query(int submissionId)
+            {
+                SubmissionId = submissionId;
+               
+            }
+        }
+
+
+        public class Handler : IRequestHandler<Query>
+        {
+            private readonly SubmissionProcessor _submissionprocessor;
+
+            public Handler(SubmissionProcessor submissionprocessor)
+            {
+                _submissionprocessor = submissionprocessor;
+
+            }
+            public async Task Handle(Query request, CancellationToken cancellationToken)
+            {
+                await _submissionprocessor.SubmitToLibrary(request.SubmissionId);
+            }
+        }
+
+
+    }
+
     public static class GetDepartmentSubmissions
     {
         public class Query : IRequest<IEnumerable<SubmissionDto>>
@@ -153,6 +187,33 @@ namespace QIMSchoolPro.Thesis.Application.Features.MySubmission.Queries
         }
     }
 
+
+    public static class GetLibrarySubmissions
+    {
+        public class Query : IRequest<IEnumerable<SubmissionDto>>
+        {
+            public Query()
+            {
+
+            }
+        }
+
+        public class Handler : IRequestHandler<Query, IEnumerable<SubmissionDto>>
+        {
+            private readonly SubmissionProcessor _submissionProcessor;
+
+            public Handler(SubmissionProcessor submissionProcessor)
+            {
+                _submissionProcessor = submissionProcessor;
+            }
+
+            public async Task<IEnumerable<SubmissionDto>> Handle(Query request, CancellationToken cancellationToken)
+            {
+                var result = await _submissionProcessor.GetLibrarySubmissions();
+                return result;
+            }
+        }
+    }
     public static class GetSPSProcessedReviews
     {
         public class Query : IRequest<IEnumerable<SubmissionDto>>

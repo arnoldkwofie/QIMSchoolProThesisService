@@ -20,6 +20,7 @@ namespace QIMSchoolPro.Thesis.Domain.Entities
         public TransitionState TransitionState { get; set; }
         public DecisionState DecisionState { get; set; }
         public int Trip { get; set; }
+        public bool Publish { get; set; }
         public DateTime SubmissionDate { get; set; }
         public AcademicPeriod AcademicPeriod { get; set; }
         //public AuditDto Audit { get; set; }

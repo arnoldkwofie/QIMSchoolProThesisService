@@ -31,6 +31,7 @@ namespace QIMSchoolPro.Students.Processors.Mappings
 			CreateMap<Grade, GradeDto>().ReverseMap();
 			CreateMap<GradeParam, GradeParamDto>().ReverseMap();
 			CreateMap<ExaminerReport, ExaminerReportDto>().ReverseMap();
+			CreateMap<OralExamination, OralExaminationDto>().ReverseMap();
 			
 		}
 	}

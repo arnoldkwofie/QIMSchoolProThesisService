@@ -1,13 +1,7 @@
 ﻿using Qface.Domain.Shared.Common;
 using QIMSchoolPro.Thesis.Domain.Enums;
 using QIMSchoolPro.Thesis.Domain.ValueObjects;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QIMSchoolPro.Thesis.Domain.Entities
 {
@@ -73,6 +67,12 @@ namespace QIMSchoolPro.Thesis.Domain.Entities
         {
             Publish = publish;
 
+            return this;
+        }
+
+        public Submission GoOnTrip(int trip)
+        {
+            Trip = trip;
             return this;
         }
         public Submission Transit(TransitionState transitionState)

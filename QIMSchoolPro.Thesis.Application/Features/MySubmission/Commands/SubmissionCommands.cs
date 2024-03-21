@@ -91,7 +91,7 @@ namespace QIMSchoolPro.Thesis.Application.Features.MySubmission.Commands
             }
             public async Task Handle(PublishCommand request, CancellationToken cancellationToken)
             {
-                await _submissionprocessor.Publish(request.id);
+                await _submissionprocessor.Publish(request.id, cancellationToken);
             }
         }
 

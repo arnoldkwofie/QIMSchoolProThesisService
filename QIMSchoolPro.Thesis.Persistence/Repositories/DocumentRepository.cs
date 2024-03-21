@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using QIMSchoolPro.Thesis.Domain.Entities;
 using QIMSchoolPro.Thesis.Persistence.Interfaces;
 using QIMSchoolPro.Thesis.Persistence.Repositories.Base;
@@ -21,7 +22,12 @@ namespace QIMSchoolPro.Thesis.Persistence.Repositories
         }
 
 
-        
+        public override IQueryable<Document> GetBaseQuery()
+        {
+            return base.GetBaseQuery().Include(a=>a.Submission);
+
+
+        }
 
     }
 }

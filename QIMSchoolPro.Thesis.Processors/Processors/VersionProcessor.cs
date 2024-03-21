@@ -11,10 +11,14 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
     public class VersionProcessor
     {
         private readonly IVersionRepository _versionRepository;
+        private readonly IDocumentRepository _documentRepository;
+        private readonly ISubmissionRepository _submissionRepository;
 
-        public VersionProcessor(IVersionRepository versionRepository)
+        public VersionProcessor(IVersionRepository versionRepository, IDocumentRepository documentRepository, ISubmissionRepository submissionRepository)
         {
             _versionRepository = versionRepository;
+            _documentRepository = documentRepository;
+            _submissionRepository = submissionRepository;
         }
 
         public async Task Create(int documentId, IFormFile file, CancellationToken cancellationToken)
@@ -31,6 +35,15 @@ namespace QIMSchoolPro.Thesis.Processors.Processors
 
                     var version = Version.Create(documentId, "v" + index, file.FileName, index);
                     await _versionRepository.InsertAsync(version, cancellationToken);
+
+                    var document = await _documentRepository.GetAsync(documentId);
+                    if (document != null && document.Submission.Publish)
+                    {
+                        var submission = await _submissionRepository.GetAsync(document.SubmissionId);
+                        int trip = submission.Trip + 1;
+                        var model = submission.GoOnTrip(trip);
+                        await _submissionRepository.UpdateAsync(model, cancellationToken);
+                    }
                 }
             }
             catch (Exception ex)

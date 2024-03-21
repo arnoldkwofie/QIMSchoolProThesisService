@@ -10,6 +10,9 @@ namespace QIMSchoolPro.Thesis.Domain.Enums
     {
         First_Internal_Examiner=1,
         Second_Internal_Examiner,
-        Externa_Examiner
+        Third_Internal_Examiner,
+        Fourth_Internal_Examiner,
+        First_External_Examiner,
+        Second_External_Examiner
     }
 }
